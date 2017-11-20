@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Difficulty Level</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="../styles/style.css">
+
+  
+</head>
+<body>
+
+  <body background="../resources/difLevel.jpg">
+  <div class="control">
+		<h2>Difficulty Levels</h2>
+		<form class="form">
+			<fieldset>
+				<legend>Add a new Difficulty Level</legend>
+				<label for="name"> Name: </label> <input type="text" name="name" id="difLevel-name"> <br/><br/>
+				<button type="submit">Submit</button>
+			</fieldset>
+		</form>
+  </div>
+  
+  <div class="list">
+  <input type="text" name="search" placeholder="Search.." class="search">
+	<h2>Difficulty Levels List</h2>
+		<article>
+			<h3 class="difLevel-name">Name</h3>
+			<button> Detele </button>
+			<button> Update </button>
+		</article>
+   </div>
+  
+    <script  src="../scripts/index.js"></script>
+
+</body>
+</html>
