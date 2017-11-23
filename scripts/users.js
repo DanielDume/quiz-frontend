@@ -1,12 +1,14 @@
-var url = "http://quiz-shm.herokuapp.com";
-console.log("hello bitches");
-$("#loginBtn").on("click",function () {
-    authenticate();
+
+
+
+$('#submit').on('click',function () {
+    adduser();
 });
 
-function authenticate(){
-    var username = $("#usernameInput").val();
-    var password = $("#passwordInput").val();
+function adduser() {
+    var name = $("#name").val();
+    var role = $("#role").val();
+    var email = $("#email").val();
     $.ajax({
         url: "https://quiz-shm.herokuapp.com/sign_in",
         contentType: "application/x-www-form-urlencoded",
@@ -22,12 +24,5 @@ function authenticate(){
             console.log('Error');
         }
     })
-}
 
-function go_to_html_main_menu(){
-    window.location.href = "index.html";
-}
-
-function go_to_login(){
-    window.location.href = "login.html";
 }
