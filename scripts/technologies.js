@@ -1,26 +1,105 @@
-
-
-
-
+var token = window.localStorage.getItem("token");
 $('#submit').on('click',function () {
 
     addTechnology();
 });
 
+$('#searchInput').on('keyup',function () {
+    var name = $("#searchInput").val();
+    delay(function(){
+        $.ajax({
+            url: 'https://quiz-shm.herokuapp.com/api/technologies',
+            headers:{'x-access-token' : token},
+            success: function(data){
+                var results=[];
+                $.each(data,function(index,value){
+                    if(value.name.indexOf(name)>=0){
+                        results.push(value);
+                    }
+                });
+                $('#technologyList').empty();
+                populateTechnologyList(results);
+
+            },
+            error: function(){
+                console.log("BAD SHIT");
+            }
+        });
+        },3000);
+});
+
+var delay = (function(){
+    var timer = 0;
+    return function (callback,ms) {
+        clearTimeout(timer);
+        timer = setTimeout(callback, ms);
+    };
+})();
+
+$(document).ready(function() {
+    getAllTechnologies();
+});
+
+function deleteTechnologyEntry(element){
+    var articleElement = $(element).closest("article");
+    var idTechnology = articleElement.attr('id');
+    deleteTechnologyRequest(idTechnology);
+}
+
+function deleteTechnologyRequest(id){
+    $.ajax({
+        url: 'https://quiz-shm.herokuapp.com/api/technologies/' + id,
+        headers:{'x-access-token' : token},
+        type: 'DELETE',
+        success: function(data){
+            getAllTechnologies();
+        },
+        error: function(){
+            console.log("BAD SHIT Delete");
+        }
+    });
+}
+
+function getAllTechnologies() {
+    $.ajax({
+        url: 'https://quiz-shm.herokuapp.com/api/technologies',
+        headers:{'x-access-token' : token},
+        success: function(data){
+            $('#technologyList').empty();
+            populateTechnologyList(data);
+        },
+        error: function(){
+            console.log("BAD SHIT");
+        }
+    });
+}
+
+function populateTechnologyList(data){
+    var unorderedList = $('#technologyList');
+    var html = "";
+    $.each(data,function(index,value){
+        html += '<article id=' + value._id + '><h3>'+ value.name + "<button onclick='deleteTechnologyEntry(this)'  class='btnTechnologies'>Delete</button><button class='btnTechnologies'>Update</button></h3></article>";
+    });
+    unorderedList.html(html);
+
+
+}
 function addTechnology() {
     var name = $("#technologies").val();
 
+
     $.ajax({
         url: "https://quiz-shm.herokuapp.com/api/technologies",
-        contentType: "application/x-www-form-urlencoded",
+        contentType:'application/x-www-form-urlencoded; charset=UTF-8',
         dataType: 'json',
         method: "POST",
+        headers:{'x-access-token' : token},
         data: {"name":name},
-        beforeSend: function(xhr){
-            xhr.setRequestHeader("X-Auth-Token", window.localStorage.getItem("token"));
-        },
         success: function (data) {
             console.log(data.message);
+            $('#technologyList').empty();
+            getAllTechnologies();
+
         },
         error: function(){
             console.log('Error');
@@ -29,22 +108,16 @@ function addTechnology() {
 
 }
 
-$('#searchBtn').keyup(function () {
 
-    searchTechnology();
-});
+/*
 function searchTechnology() {
     var name = $("#searchBtn").val();
-
     $.ajax({
         url: "https://quiz-shm.herokuapp.com/api/technologies?name=" + name,
         contentType: "application/json",
         dataType: 'json',
-        authorization: window.localStorage.getItem("token"),
         method: "GET",
-        beforeSend: function(xhr){
-            xhr.setRequestHeader("X-Auth-Token", window.localStorage.getItem("token"));
-        },
+        headers:{'x-access-token' : token},
         success: function (data) {
             console.log(data.message);
         },
@@ -53,4 +126,4 @@ function searchTechnology() {
         }
     });
 
-}
+}*/
