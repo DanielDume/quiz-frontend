@@ -1,30 +1,40 @@
 var url = "http://quiz-shm.herokuapp.com";
 
+$(document).ready(function () {
+    $('#header-icon').click(function (e) {
+        e.preventDefault();
+        $('body').toggleClass('with-sidebar');
+    });
 
-// TODO; to be investicated
-/*window.onload = function () {
+    $('#site-cache').click(function (e) {
+        $('body').removeClass('with-sidebar');
+    });
+
     try_authenticate();
-}*/
+    
+
+});
 
 
-function try_authenticate(){
+
+function try_authenticate() {
     $.ajax({
-        url: url + "/",
+        url: url + "/api",
         method: "GET",
         contentType: "application/x-www-form-urlencoded",
-        beforeSend: function(xhr){
-            xhr.setRequestHeader("X-Auth-Token", window.localStorage.getItem("token"));
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("x-access-token", window.localStorage.getItem("token"));
         },
-        success: function(){
+        success: function () {
             console.log("Success")
         },
-        error: function(){
+        error: function () {
             console.log("Error");
             go_to_login();
         }
     })
 }
 
-function go_to_login(){
+function go_to_login() {
     window.location.href = "login.html";
 }
