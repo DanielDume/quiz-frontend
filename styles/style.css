@@ -103,3 +103,7 @@ button:hover {
 .search:focus {
     width: 100%;
 }
+
+.btnTechnologies{
+    float:right;
+}
