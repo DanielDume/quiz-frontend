@@ -4,21 +4,68 @@ $('#submit').on('click',function () {
     addTechnology();
 });
 
-$('#searchBtn').keyup(function () {
+$('#searchInput').on('keyup',function () {
+    var name = $("#searchInput").val();
+    delay(function(){
+        $.ajax({
+            url: 'https://quiz-shm.herokuapp.com/api/technologies',
+            headers:{'x-access-token' : token},
+            success: function(data){
+                var results=[];
+                $.each(data,function(index,value){
+                    if(value.name.indexOf(name)>=0){
+                        results.push(value);
+                    }
+                });
+                $('#technologyList').empty();
+                populateTechnologyList(results);
 
-    searchTechnology();
+            },
+            error: function(){
+                console.log("BAD SHIT");
+            }
+        });
+        },3000);
 });
+
+var delay = (function(){
+    var timer = 0;
+    return function (callback,ms) {
+        clearTimeout(timer);
+        timer = setTimeout(callback, ms);
+    };
+})();
 
 $(document).ready(function() {
     getAllTechnologies();
 });
+
+function deleteTechnologyEntry(element){
+    var articleElement = $(element).closest("article");
+    var idTechnology = articleElement.attr('id');
+    deleteTechnologyRequest(idTechnology);
+}
+
+function deleteTechnologyRequest(id){
+    $.ajax({
+        url: 'https://quiz-shm.herokuapp.com/api/technologies/' + id,
+        headers:{'x-access-token' : token},
+        type: 'DELETE',
+        success: function(data){
+            getAllTechnologies();
+        },
+        error: function(){
+            console.log("BAD SHIT Delete");
+        }
+    });
+}
 
 function getAllTechnologies() {
     $.ajax({
         url: 'https://quiz-shm.herokuapp.com/api/technologies',
         headers:{'x-access-token' : token},
         success: function(data){
-            console.log(data);
+            $('#technologyList').empty();
             populateTechnologyList(data);
         },
         error: function(){
@@ -31,8 +78,7 @@ function populateTechnologyList(data){
     var unorderedList = $('#technologyList');
     var html = "";
     $.each(data,function(index,value){
-        console.log(value.name);
-        html += '<article id=' + value._id + '><h3>'+ value.name + "<button class='btnTechnologies'>Delete</button><button class='btnTechnologies'>Update</button></h3></article>";
+        html += '<article id=' + value._id + '><h3>'+ value.name + "<button onclick='deleteTechnologyEntry(this)'  class='btnTechnologies'>Delete</button><button class='btnTechnologies'>Update</button></h3></article>";
     });
     unorderedList.html(html);
 
@@ -49,11 +95,11 @@ function addTechnology() {
         method: "POST",
         headers:{'x-access-token' : token},
         data: {"name":name},
-        // beforeSend: function(xhr){
-        //     xhr.setRequestHeader("X-Auth-Token", window.localStorage.getItem("token"));
-        // },
         success: function (data) {
             console.log(data.message);
+            $('#technologyList').empty();
+            getAllTechnologies();
+
         },
         error: function(){
             console.log('Error');
@@ -63,6 +109,7 @@ function addTechnology() {
 }
 
 
+/*
 function searchTechnology() {
     var name = $("#searchBtn").val();
     $.ajax({
@@ -79,4 +126,4 @@ function searchTechnology() {
         }
     });
 
-}
+}*/
