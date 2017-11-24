@@ -65,35 +65,36 @@
 				</header>
 				<div style="padding-top: 70px">
 		<div class="control">
-			<h2>Users</h2>
-			<form class="form">
+
+			<div class="form" action="#">
 				<fieldset>
-					<legend>Add a new user</legend>
-					<label for="name"> Name: </label>
-					<input id="name" type="text" name="name" id="user-name">
+					<legend style="font-weight: bold">Add a new user</legend>
+					<label for="name"> Username: </label>
+					<input id="username" type="text">
 					<br/>
 					<br/>
-					<label for="role"> Role: </label>
-					<input id="role" type="text" name="role" id="user-role">
+					<label for="role"> First name: </label>
+					<input id="firstName" type="text" >
+					<br/>
+					<br/>
+					<label for="role"> Last name: </label>
+					<input id="lastName" type="text">
 					<br/>
 					<br/>
 					<label for="email"> Email: </label>
-					<input id="email" type="email" name="email" id="user-email">
-					<button id="submit" type="submit">Submit</button>
+					<input id="email" type="email">
+					<br/>
+					<br/>
+					<label for="role"> Password: </label>
+					<input id="password" type="text">
+					<button id="submit">Submit</button>
 				</fieldset>
-			</form>
+			</div>
 		</div>
 
 		<div class="list" id="list">
 			<input type="text" name="search" placeholder="Search.." class="search" id="searchBtn">
 			<h2>Users List</h2>
-			<article>
-				<h3 class="user-name">Name</h3>
-				<h4 class="user-role">Role</h4>
-				<p class="user-email">Email</p>
-				<button> Detele </button>
-				<button> Update </button>
-			</article>
 		</div>
 		</div>
 		<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="

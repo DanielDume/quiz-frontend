@@ -1,7 +1,7 @@
 $(document).ready(function () {
+    searchDifficultyLevel();
     $('#submit').on('click', function () {
-        addDifficultyLevel();
-        searchDifficultyLevel();
+        addDifficultyLevel();        
     });
     $('#searchBtn').keyup(function () {
         searchDifficultyLevel();
@@ -16,6 +16,7 @@ $(document).ready(function () {
             headers: { 'x-access-token': token },
             success: function (data) {
                 $(this).parent().remove();
+                searchDifficultyLevel();
             },
             error: function () {
                 alert("Failed to delete, check console");
@@ -34,7 +35,9 @@ $(document).ready(function () {
             headers: { 'x-access-token': token },
             data: { name: name },
             success: function (data) {
+                $("#name").val("");
                 console.log(data);
+                searchDifficultyLevel();
             },
             error: function () {
                 console.log("BAD SHIT");
