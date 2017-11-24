@@ -1,19 +1,19 @@
 $(document).ready(function () {
     $('#submit').on('click', function () {
-        addUser();
-        searchUser();
+        addDifficultyLevel();
+        searchDifficultyLevel();
     });
     $('#searchBtn').keyup(function () {
-        searchUser();
+        searchDifficultyLevel();
     });
     $("#list").on("click", 'article #deleteButton', function (e) {
         var id = $(this).parent().find('p')[0].innerText;
         var token = window.localStorage.getItem("token");
+        $(this).parent().remove();
         $.ajax({
-            url: 'https://quiz-shm.herokuapp.com/api/users',
+            url: 'https://quiz-shm.herokuapp.com/api/difficulties/' + id,
             method: "DELETE",
             headers: { 'x-access-token': token },
-            data: { id: id },
             success: function (data) {
                 $(this).parent().remove();
             },
@@ -24,15 +24,15 @@ $(document).ready(function () {
         });
     });
 
-    function addUser() {
+    function addDifficultyLevel() {
         console.log("ENTERED ADD");
         var token = window.localStorage.getItem("token");
         var name = $("#name").val();
         $.ajax({
-            url: 'https://quiz-shm.herokuapp.com/api/users',
+            url: 'https://quiz-shm.herokuapp.com/api/difficulties',
             method: "POST",
             headers: { 'x-access-token': token },
-            data: { name: name }, // put shit here
+            data: { name: name },
             success: function (data) {
                 console.log(data);
             },
@@ -43,20 +43,22 @@ $(document).ready(function () {
 
     };
 
-    function searchUser() {
+    function searchDifficultyLevel() {
         $("article", "#list").remove();
         var name = $("#searchBtn").val();
         var token = window.localStorage.getItem("token");
         $.ajax({
-            url: 'https://quiz-shm.herokuapp.com/api/users',
+            url: 'https://quiz-shm.herokuapp.com/api/difficulties',
             headers: { 'x-access-token': token },
-            //data: {name: name},
+            data: {name: name},
             success: function (data) {
-                console.log(data);
                 var row = "";
                 $.each(data, function (index, item) {
-                    row = '<article>' + '<p style="display: none">' + item._id + '</p>' + '<h3 class="user-name">' + item.firstName + ' ' + item.lastName + '</h3><h4 class="user-role">' + item.role + '</h4><button id=deleteButton> Detele </button><button id=updateButton> Update </button></article>'
-                    $("#list").append(row);
+
+                    if (name === '' || item.name.startsWith(name)) {
+                        row = '<article><h3 class="difLevel-name">' + item.name + '</h3><p style="display: none">' + item._id + '</p><button id=deleteButton> Detele </button><button id=updateButton> Update </button></article>'
+                        $("#list").append(row);    
+                    }
                 });
             },
             error: function () {
