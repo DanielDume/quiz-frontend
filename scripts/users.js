@@ -41,10 +41,9 @@ function updateUserRequest() {
 function searchUser() {
     $("article", "#list").remove();
     var name = $("#searchBtn").val();
-    var token = window.localStorage.getItem("token");
     $.ajax({
         url: 'https://quiz-shm.herokuapp.com/api/users',
-        headers: {'x-access-token': token},
+        headers: {'x-access-token': window.localStorage.getItem("token")},
         contentType: "application/x-www-form-urlencoded",
         data: {firstName: name},
         success: function (data) {
@@ -76,7 +75,7 @@ $(document).ready(function () {
     $('#searchBtn').keyup(function () {
         searchUser();
     });
-    $("#list").on("click", 'article #deleteButton', function (e) {
+    $("#list").on("click", 'article #deleteButton', function () {
         var id = $(this).parent().find('p')[0].innerText;
         var token = window.localStorage.getItem("token");
         $.ajax({
@@ -85,7 +84,7 @@ $(document).ready(function () {
             headers: {'x-access-token': token},
             contentType: "application/x-www-form-urlencoded",
             data: {id: id},
-            success: function (data) {
+            success: function () {
                 $(this).parent().remove();
                 searchUser();
             },

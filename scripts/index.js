@@ -6,13 +6,10 @@ $(document).ready(function () {
         $('body').toggleClass('with-sidebar');
     });
 
-    $('#site-cache').click(function (e) {
+    $('#site-cache').click(function () {
         $('body').removeClass('with-sidebar');
     });
-
     try_authenticate();
-
-
 });
 
 function try_authenticate() {
@@ -20,9 +17,7 @@ function try_authenticate() {
         url: url + "/api",
         method: "GET",
         contentType: "application/x-www-form-urlencoded",
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("x-access-token", window.localStorage.getItem("token"));
-        },
+        headers: {'x-access-token': window.localStorage.getItem("token")},
         success: function () {
             console.log("Success")
         },

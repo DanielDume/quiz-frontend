@@ -4,7 +4,7 @@ $(document).ready(function () {
         $('body').toggleClass('with-sidebar');
     });
 
-    $('#site-cache').click(function (e) {
+    $('#site-cache').click(function () {
         $('body').removeClass('with-sidebar');
     });
 });

@@ -59,7 +59,7 @@ function deleteTechnologyRequest(id) {
         url: 'https://quiz-shm.herokuapp.com/api/technologies/' + id,
         headers: {'x-access-token': token},
         type: 'DELETE',
-        success: function (data) {
+        success: function () {
             getAllTechnologies();
         },
         error: function () {
@@ -74,7 +74,7 @@ function updateTechnologyRequest(id){
         headers: {'x-access-token': token},
         type: 'PUT',
         data : {name: document.getElementById("technologiesModal").value},
-        success: function(data){
+        success: function(){
             getAllTechnologies();
         },
         error: function(){

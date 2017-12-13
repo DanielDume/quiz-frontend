@@ -8,12 +8,11 @@ function hideUpdateModal() {
 
 function addDifficultyLevel() {
     console.log("ENTERED ADD");
-    var token = window.localStorage.getItem("token");
     var name = $("#name").val();
     $.ajax({
         url: 'https://quiz-shm.herokuapp.com/api/difficulties',
         method: "POST",
-        headers: { 'x-access-token': token },
+        headers: { 'x-access-token': window.localStorage.getItem("token") },
         data: { name: name },
         success: function (data) {
             $("#name").val("");
@@ -60,7 +59,7 @@ $(document).ready(function () {
     $('#searchBtn').keyup(function () {
         searchDifficultyLevel();
     });
-    $("#list").on("click", 'article #deleteButton', function (e) {
+    $("#list").on("click", 'article #deleteButton', function () {
         var id = $(this).parent().find('p')[0].innerText;
         var token = window.localStorage.getItem("token");
         $(this).parent().remove();
@@ -68,7 +67,7 @@ $(document).ready(function () {
             url: 'https://quiz-shm.herokuapp.com/api/difficulties/' + id,
             method: "DELETE",
             headers: { 'x-access-token': token },
-            success: function (data) {
+            success: function () {
                 $(this).parent().remove();
                 searchDifficultyLevel();
             },

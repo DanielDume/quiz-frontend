@@ -2,110 +2,108 @@
 <html>
 
 <head>
-	<meta charset="UTF-8">
-	<title>Difficulty Level</title>
+    <meta charset="UTF-8">
+    <title>Difficulty Level</title>
 </head>
 
 <body background="../resources/difLevel.jpg">
 <header>
 
-	<ul class="nav">
-		<li>
-			<a href="#">
-				<span>Home</span>
-			</a>
-		</li>
+    <ul class="nav">
+        <li>
+            <a href="#">
+                <span>Home</span>
+            </a>
+        </li>
 
-		<li>
-			<div class="dropdown">
-				<a href="#" class="drop-btn">Acount</a>
-				<div class="dropdown-content">
-					<a href="">Profile</a>
-					<a href="">Logout</a>
-				</div>
-			</div>
-		</li>
+        <li>
+            <div class="dropdown">
+                <a href="#" class="drop-btn">Acount</a>
+                <div class="dropdown-content">
+                    <a href="">Profile</a>
+                    <a href="">Logout</a>
+                </div>
+            </div>
+        </li>
 
-		<li>
-			<div class="dropdown">
-				<a class="drop-btn">Quiz</a>
+        <li>
+            <div class="dropdown">
+                <a class="drop-btn">Quiz</a>
 
-				<div class="dropdown-content">
-					<a href="#">Take a Quiz</a>
-					<a href="#">Create a Quiz</a>
-					<a href="#">See all Quizzes</a>
-				</div>
-			</div>
-		</li>
+                <div class="dropdown-content">
+                    <a href="#">Take a Quiz</a>
+                    <a href="#">Create a Quiz</a>
+                    <a href="#">See all Quizzes</a>
+                </div>
+            </div>
+        </li>
 
-		<li>
-			<a href="#">
-				<span>Questions</span>
-			</a>
-		</li>
+        <li>
+            <a href="#">
+                <span>Questions</span>
+            </a>
+        </li>
 
 
-		<li>
-			<a href="users.html">
-				<span>Users</span>
-			</a>
-		</li>
+        <li>
+            <a href="users.html">
+                <span>Users</span>
+            </a>
+        </li>
 
-		<li>
-			<a href="technology.html">
-				<span>Technologies</span>
-			</a>
-		</li>
+        <li>
+            <a href="technology.html">
+                <span>Technologies</span>
+            </a>
+        </li>
 
-		<li>
-			<a href="difficultyLevel.html" id="difficultyLevelLink">
-              <span>Dificulty Level<span>
-			</a>
-		</li>
-	</ul>
+        <li>
+            <a href="difficultyLevel.html" id="difficultyLevelLink">
+                <span>Dificulty Level</span>
+            </a>
+        </li>
+    </ul>
 
 </header>
 <div style="padding-top: 70px">
-	<div class="control">
-		<h2>Difficulty Levels</h2>
-		<div class="form" action="#">
-			<fieldset>
-				<legend>Add a new Difficulty Level</legend>
-				<label for="name"> Name: </label>
-				<input id="name" type="text">
-				<br/>
-				<br/>
-				<button id="submit">Add</button>
-			</fieldset>
-		</div>
-	</div>
+    <div class="control">
+        <h2>Difficulty Levels</h2>
+        <div class="form" action="#">
+            <fieldset>
+                <legend>Add a new Difficulty Level</legend>
+                <label for="name"> Name: </label>
+                <input id="name" type="text">
+                <br/>
+                <br/>
+                <button id="submit">Add</button>
+            </fieldset>
+        </div>
+    </div>
 
-	<div class="list" id="list">
-		<input type="text" name="search" placeholder="Search.." class="search" id="searchBtn">
-		<h2>Difficulty Levels List</h2>
-		<div id="myModal" class="modal" style="visibility: hidden">
-			<div class="modal-content">
-				<span class="close" onclick="hideUpdateModal()">&times;</span>
-				<h1>Update a Difficulty Level </h1>
-				<div class="form">
-					<fieldset>
-						<label for="technologies"> Name: </label>
-						<input id="technologies" type="text" name="name">
-						<button id="submitUpdateDif">Update</button>
-						<button id="cancelUpdateDif" onclick="hideUpdateModal()">Cancel</button>
-					</fieldset>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="list" id="list">
+        <input type="text" name="search" placeholder="Search.." class="search" id="searchBtn">
+        <h2>Difficulty Levels List</h2>
+        <div id="myModal" class="modal" style="visibility: hidden">
+            <div class="modal-content">
+                <span class="close" onclick="hideUpdateModal()">&times;</span>
+                <h1>Update a Difficulty Level </h1>
+                <div class="form">
+                    <fieldset>
+                        <label for="technologies"> Name: </label>
+                        <input id="technologies" type="text" name="name">
+                        <button id="submitUpdateDif">Update</button>
+                        <button id="cancelUpdateDif" onclick="hideUpdateModal()">Cancel</button>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel="stylesheet" href="../styles/style.css">
 <link rel="stylesheet" type="text/css" href="../styles/index.css">
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"
-		integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-		crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="../scripts/index.js"></script>
 <script src="../scripts/difficultyLevel.js"></script>
 </body>
