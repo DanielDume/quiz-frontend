@@ -10,7 +10,6 @@ function authenticate(){
     $.ajax({
         url: "https://quiz-shm.herokuapp.com/sign_in",
         contentType: "application/x-www-form-urlencoded",
-        // dataType: 'json',
         method: "POST",
         data: {"username":username, "password":password},
         success: function (data) {

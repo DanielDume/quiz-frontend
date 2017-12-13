@@ -11,11 +11,9 @@ $(document).ready(function () {
     });
 
     try_authenticate();
-    
+
 
 });
-
-
 
 function try_authenticate() {
     $.ajax({

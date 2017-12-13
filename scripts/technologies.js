@@ -1,19 +1,19 @@
 var token = window.localStorage.getItem("token");
-$('#submit').on('click',function () {
+$('#submit').on('click', function () {
 
     addTechnology();
 });
 
-$('#searchInput').on('keyup',function () {
+$('#searchInput').on('keyup', function () {
     var name = $("#searchInput").val();
-    delay(function(){
+    delay(function () {
         $.ajax({
             url: 'https://quiz-shm.herokuapp.com/api/technologies',
-            headers:{'x-access-token' : token},
-            success: function(data){
-                var results=[];
-                $.each(data,function(index,value){
-                    if(value.name.indexOf(name)>=0){
+            headers: {'x-access-token': token},
+            success: function (data) {
+                var results = [];
+                $.each(data, function (index, value) {
+                    if (value.name.indexOf(name) >= 0) {
                         results.push(value);
                     }
                 });
@@ -21,87 +21,112 @@ $('#searchInput').on('keyup',function () {
                 populateTechnologyList(results);
 
             },
-            error: function(){
+            error: function () {
                 console.log("BAD SHIT");
             }
         });
-        },3000);
+    }, 3000);
 });
 
-var delay = (function(){
+var delay = (function () {
     var timer = 0;
-    return function (callback,ms) {
+    return function (callback, ms) {
         clearTimeout(timer);
         timer = setTimeout(callback, ms);
     };
 })();
 
-$(document).ready(function() {
+$(document).ready(function () {
     getAllTechnologies();
 });
 
-function deleteTechnologyEntry(element){
+function deleteTechnologyEntry(element) {
     var articleElement = $(element).closest("article");
     var idTechnology = articleElement.attr('id');
     deleteTechnologyRequest(idTechnology);
 }
 
-function deleteTechnologyRequest(id){
+function showUpdateModal() {
+    document.getElementById("myModal").style.visibility = "visible";
+}
+
+function hideUpdateModal(){
+    document.getElementById("myModal").style.visibility = "hidden";
+}
+
+function deleteTechnologyRequest(id) {
     $.ajax({
         url: 'https://quiz-shm.herokuapp.com/api/technologies/' + id,
-        headers:{'x-access-token' : token},
+        headers: {'x-access-token': token},
         type: 'DELETE',
-        success: function(data){
+        success: function (data) {
             getAllTechnologies();
         },
-        error: function(){
+        error: function () {
             console.log("BAD SHIT Delete");
         }
     });
 }
 
+function updateTechnologyRequest(id){
+    $.ajax({
+        url: 'https://quiz-shm.herokuapp.com/api/technologies/' + id,
+        headers: {'x-access-token': token},
+        type: 'PUT',
+        data : {name: document.getElementById("technologiesModal").value},
+        success: function(data){
+            getAllTechnologies();
+        },
+        error: function(){
+            console.log("BAD SHIT Update");
+        }
+    })
+}
+
+
 function getAllTechnologies() {
     $.ajax({
         url: 'https://quiz-shm.herokuapp.com/api/technologies',
-        headers:{'x-access-token' : token},
-        success: function(data){
+        headers: {'x-access-token': token},
+        success: function (data) {
             $('#technologyList').empty();
             populateTechnologyList(data);
         },
-        error: function(){
+        error: function () {
             console.log("BAD SHIT");
         }
     });
 }
 
-function populateTechnologyList(data){
+function populateTechnologyList(data) {
     var unorderedList = $('#technologyList');
     var html = "";
-    $.each(data,function(index,value){
-        html += '<article id=' + value._id + '><h3>'+ value.name + "<button onclick='deleteTechnologyEntry(this)'  class='btnTechnologies'>Delete</button><button class='btnTechnologies'>Update</button></h3></article>";
+    $.each(data, function (index, value) {
+        html += '<article id=' + value._id + '><h3>' + value.name + "<button onclick='deleteTechnologyEntry(this)'  class='btnTechnologies'>Delete</button><button onclick='showUpdateModal(this)' class='btnTechnologies'>Update</button></h3></article>";
     });
     unorderedList.html(html);
 
 
 }
+
 function addTechnology() {
     var name = $("#technologies").val();
 
 
     $.ajax({
         url: "https://quiz-shm.herokuapp.com/api/technologies",
-        contentType:'application/x-www-form-urlencoded; charset=UTF-8',
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
         dataType: 'json',
         method: "POST",
-        headers:{'x-access-token' : token},
-        data: {"name":name},
+        headers: {'x-access-token': token},
+        data: {"name": name},
         success: function (data) {
             console.log(data.message);
             $('#technologyList').empty();
             getAllTechnologies();
 
         },
-        error: function(){
+        error: function () {
             console.log('Error');
         }
     });

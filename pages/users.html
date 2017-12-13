@@ -5,149 +5,146 @@
 	<meta charset="UTF-8">
 	<title>Users</title>
 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-	<link rel="stylesheet" href="../styles/style.css">
-	<link rel="stylesheet" type="text/css" href="../styles/index.css">
-
-
 </head>
 
-<body>
+<body background="../resources/users.jpg">
+<header>
 
-	<body background="../resources/users.jpg">
-        <header>
-		  
-		  <ul class="nav">
-			<li>
+	<ul class="nav">
+		<li>
 			<a href="#">
-              <span>Home</span>
-            </a>
-			</li> 
-			
-			<li>
-            <div class="dropdown">
-              <a href="#" class="drop-btn">Acount</a>
-              <div class="dropdown-content">
-                <a href="">Profile</a>
-                <a href="">Logout</a>
-              </div>
-            </div>
-			</li> 
-			
-			<li>
+				<span>Home</span>
+			</a>
+		</li>
+
+		<li>
 			<div class="dropdown">
-              <a class="drop-btn">Quiz</a>
+				<a href="#" class="drop-btn">Acount</a>
+				<div class="dropdown-content">
+					<a href="">Profile</a>
+					<a href="">Logout</a>
+				</div>
+			</div>
+		</li>
 
-              <div class="dropdown-content">
-                <a href="#">Take a Quiz</a>
-                <a href="#">Create a Quiz</a>
-                <a href="#">See all Quizzes</a>
-              </div>
-            </div>
-			</li> 
-			
-			<li> 
+		<li>
+			<div class="dropdown">
+				<a class="drop-btn">Quiz</a>
+
+				<div class="dropdown-content">
+					<a href="#">Take a Quiz</a>
+					<a href="#">Create a Quiz</a>
+					<a href="#">See all Quizzes</a>
+				</div>
+			</div>
+		</li>
+
+		<li>
 			<a href="#">
-              <span>Questions</span>
-            </a>
-			</li> 
-			
-			
-			<li> 
+				<span>Questions</span>
+			</a>
+		</li>
+
+
+		<li>
 			<a href="users.html">
-              <span>Users</span>
-            </a>
-			</li> 
-			
-			<li> 
-            <a href="technology.html">
-              <span>Technologies</span>
-            </a>
-			</li> 
-			
-			<li> 
-            <a href="difficultyLevel.html" id="difficultyLevelLink">
-              <span>Dificulty Level<span>
-            </a>
-			</li> 
-		  </ul>
+				<span>Users</span>
+			</a>
+		</li>
 
-        </header>
-		<div style="padding-top: 70px">
-		<div class="control">
+		<li>
+			<a href="technology.html">
+				<span>Technologies</span>
+			</a>
+		</li>
 
-			<div class="form" action="#">
-				<fieldset>
-					<legend style="font-weight: bold">Add a new user</legend>
-					<label for="name"> Username: </label>
-					<input id="username" type="text">
-					<br/>
-					<br/>
-					<label for="role"> First name: </label>
-					<input id="firstName" type="text" >
-					<br/>
-					<br/>
-					<label for="role"> Last name: </label>
-					<input id="lastName" type="text">
-					<br/>
-					<br/>
-					<label for="email"> Email: </label>
-					<input id="email" type="email">
-					<br/>
-					<br/>
-					<label for="role"> Password: </label>
-					<input id="password" type="text">
-					<button id="submit">Submit</button>
-				</fieldset>
-			</div>
+		<li>
+			<a href="difficultyLevel.html" id="difficultyLevelLink">
+				<span>Dificulty Level</span>
+			</a>
+		</li>
+	</ul>
+
+</header>
+<div style="padding-top: 70px">
+	<div class="control">
+
+		<div class="form" action="#">
+			<fieldset>
+				<legend style="font-weight: bold">Add a new user</legend>
+				<label for="usernameAdd"> Username: </label>
+				<input id="usernameAdd" type="text">
+				<br/>
+				<br/>
+				<label for="firstNameAdd"> First name: </label>
+				<input id="firstNameAdd" type="text">
+				<br/>
+				<br/>
+				<label for="lastNameAdd"> Last name: </label>
+				<input id="lastNameAdd" type="text">
+				<br/>
+				<br/>
+				<label for="emailAdd"> Email: </label>
+				<input id="emailAdd" type="email">
+				<br/>
+				<br/>
+				<label for="passwordAdd"> Password: </label>
+				<input id="passwordAdd" type="text">
+				<button id="submit">Submit</button>
+			</fieldset>
 		</div>
+	</div>
 
-		<div class="list" id="list">
-			<input type="text" name="search" placeholder="Search.." class="search" id="searchBtn">
-			<h2>Users List</h2>
-			<div id="myModal" class="modal">
-			  <div class="modal-content">
-				<span class="close">&times;</span>
+	<div class="list" id="list">
+		<input type="text" name="search" placeholder="Search.." class="search" id="searchBtn">
+		<h2>Users List</h2>
+		<div id="myModal" class="modal" style="visibility: hidden;">
+			<div class="modal-content">
+                <span class="close"
+					  onclick="document.getElementById('myModal').style.visibility = 'hidden'">&times;</span>
 				<h1>Update a user </h1>
-				<div class="form" action="#">
-				<fieldset>
-					<label for="name"> Username: </label>
-					<input id="username" type="text">
-					<br/>
-					<br/>
-					<label for="role"> First name: </label>
-					<input id="firstName" type="text" >
-					<br/>
-					<br/>
-					<label for="role"> Last name: </label>
-					<input id="lastName" type="text">
-					<br/>
-					<br/>
-					<label for="email"> Email: </label>
-					<input id="email" type="email">
-					<br/>
-					<br/>
-					<label for="role"> Password: </label>
-					<input id="password" type="text">
-					<button id="submitUpdateUsers">Update</button>
-					<button id="cancelUpdateUsers">Cancel</button>
-				</fieldset>
+				<div class="form">
+					<fieldset>
+						<label for="usernameUpdate"> Username: </label>
+						<input id="usernameUpdate" type="text">
+						<br/>
+						<br/>
+						<label for="firstNameUpdate"> First name: </label>
+						<input id="firstNameUpdate" type="text">
+						<br/>
+						<br/>
+						<label for="lastNameUpdate"> Last name: </label>
+						<input id="lastNameUpdate" type="text">
+						<br/>
+						<br/>
+						<label for="emailUpdate"> Email: </label>
+						<input id="emailUpdate" type="email">
+						<br/>
+						<br/>
+						<label for="passwordUpdate"> Password: </label>
+						<input id="passwordUpdate" type="text">
+						<button id="submitUpdateUsers"
+								onclick="updateUserRequest($(this).closest('article').attr('id'));hideUpdateModal();">
+							Update
+						</button>
+						<button id="cancelUpdateUsers"
+								onclick="document.getElementById('myModal').style.visibility = 'hidden'">Cancel
+						</button>
+					</fieldset>
+				</div>
 			</div>
-			  </div>
-		   </div>
 		</div>
-		
-		</div>
-		
+	</div>
+</div>
+</body>
 
-	 
-		<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-		 crossorigin="anonymous"></script>
-		 <script type="text/javascript" src="../scripts/index.js"></script>
-		<script src="../scripts/users.js"></script>
-		
-		
-
-	</body>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="../styles/style.css">
+<link rel="stylesheet" type="text/css" href="../styles/index.css">
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+		integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+		crossorigin="anonymous"></script>
+<script type="text/javascript" src="../scripts/index.js"></script>
+<script src="../scripts/users.js"></script>
 
 </html>
