@@ -1,4 +1,3 @@
-var token = window.localStorage.getItem("token");
 $('#submit').on('click', function () {
 
     addTechnology();
@@ -9,7 +8,7 @@ $('#searchInput').on('keyup', function () {
     delay(function () {
         $.ajax({
             url: 'https://quiz-shm.herokuapp.com/api/technologies',
-            headers: {'x-access-token': token},
+            headers: {'x-access-token': window.localStorage.getItem("token")},
             success: function (data) {
                 var results = [];
                 $.each(data, function (index, value) {
@@ -57,7 +56,7 @@ function hideUpdateModal(){
 function deleteTechnologyRequest(id) {
     $.ajax({
         url: 'https://quiz-shm.herokuapp.com/api/technologies/' + id,
-        headers: {'x-access-token': token},
+        headers: {'x-access-token': window.localStorage.getItem("token")},
         type: 'DELETE',
         success: function () {
             getAllTechnologies();
@@ -71,7 +70,7 @@ function deleteTechnologyRequest(id) {
 function updateTechnologyRequest(id){
     $.ajax({
         url: 'https://quiz-shm.herokuapp.com/api/technologies/' + id,
-        headers: {'x-access-token': token},
+        headers: {'x-access-token': window.localStorage.getItem("token")},
         type: 'PUT',
         data : {name: document.getElementById("technologiesModal").value},
         success: function(){
@@ -87,7 +86,7 @@ function updateTechnologyRequest(id){
 function getAllTechnologies() {
     $.ajax({
         url: 'https://quiz-shm.herokuapp.com/api/technologies',
-        headers: {'x-access-token': token},
+        headers: {'x-access-token': window.localStorage.getItem("token")},
         success: function (data) {
             $('#technologyList').empty();
             populateTechnologyList(data);
@@ -118,7 +117,7 @@ function addTechnology() {
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
         dataType: 'json',
         method: "POST",
-        headers: {'x-access-token': token},
+        headers: {'x-access-token': window.localStorage.getItem("token")},
         data: {"name": name},
         success: function (data) {
             console.log(data.message);
