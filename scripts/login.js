@@ -1,6 +1,11 @@
-console.log("hello bitches");
 $("#loginBtn").on("click", function () {
     authenticate();
+});
+
+$(document).keypress(function(e) {
+    if(e.which === 13) {
+        $("#loginBtn").click();
+    }
 });
 
 function authenticate() {
