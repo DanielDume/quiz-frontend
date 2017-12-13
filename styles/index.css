@@ -213,3 +213,92 @@ ul {
     background-color: rgba(0, 0, 0, 0.6);
   }
 }
+
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+body {
+  margin: 0px;
+}
+
+.nav{
+	display: flex;
+	justify-content: center;
+	list-style: none;
+	background-color: rgb(1, 38, 34 );
+	opacity:0.9;
+	width:100%;
+	height:auto;
+	font-family: 'Open Sans', sans-serif;
+	padding: 24px;
+	box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+	margin:0 auto;
+	
+	
+}
+
+.nav a {
+  transition: 0.4s;
+  color: #ffffff;
+  font-size: 20px;
+  text-decoration: none;
+  padding: 0 10px;
+  margin: 0 10px;
+  text-align:center;
+		
+}
+
+.nav a:hover {
+	background-color:#8A8C99;
+	color: #ffffff;
+	padding: 24px 10px;
+	
+}
+
+
+.nav li {
+	top:0px;
+    float: left;
+	position: relative;
+	margin:auto;
+	display:inline-block;
+	text-align: center;
+    
+}
+
+.nav ul {
+	display: flex;
+	flex-flow: row wrap;
+	float: left;
+    display: inline-block;
+	text-align : center;
+	color:blue;
+    background-color: white; 
+    list-style: none;
+
+}
+
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    font-size: 16px;
+    line-height: 42px;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    margin-top: 15px;
+}
+
+.dropdown-content a{
+	color: #000;
+	font-size: 15px;
+}
+
+.dropdown-content a:hover {
+		color: #fff;
+	        padding: 5px 15px;
+}
+
+
+	

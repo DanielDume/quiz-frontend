@@ -11,54 +11,64 @@
 </head>
 
 <body background="../resources/difLevel.jpg">
-	<header class="header">
-
-		<a href="#" class="header-icon" id="header-icon"></a>
-		<a href="#" class="header-logo">Logo</a>
-
-		<nav class="menu">
+	        <header>
+		  
+		  <ul class="nav">
+			<li>
 			<a href="#">
-				<span>Home</span>
-			</a>
-
+              <span>Home</span>
+            </a>
+			</li> 
+			
+			<li>
+            <div class="dropdown">
+              <a href="#" class="drop-btn">Acount</a>
+              <div class="dropdown-content">
+                <a href="">Profile</a>
+                <a href="">Logout</a>
+              </div>
+            </div>
+			</li> 
+			
+			<li>
 			<div class="dropdown">
-				<span class="drop-btn">Acount</span>
+              <a class="drop-btn">Quiz</a>
 
-				<div class="dropdown-content">
-					<a href="">Profile</a>
-					<a href="">Logout</a>
-				</div>
-			</div>
-
-			<div class="dropdown">
-				<span class="drop-btn">Quiz</span>
-
-				<div class="dropdown-content">
-					<a href="#">Take a Quiz</a>
-					<a href="#">Create a Quiz</a>
-					<a href="#">See all Quizzes</a>
-				</div>
-			</div>
-
+              <div class="dropdown-content">
+                <a href="#">Take a Quiz</a>
+                <a href="#">Create a Quiz</a>
+                <a href="#">See all Quizzes</a>
+              </div>
+            </div>
+			</li> 
+			
+			<li> 
 			<a href="#">
-				<span>Questions</span>
-			</a>
-
+              <span>Questions</span>
+            </a>
+			</li> 
+			
+			
+			<li> 
 			<a href="users.html">
-				<span>Users</span>
-			</a>
+              <span>Users</span>
+            </a>
+			</li> 
+			
+			<li> 
+            <a href="technology.html">
+              <span>Technologies</span>
+            </a>
+			</li> 
+			
+			<li> 
+            <a href="difficultyLevel.html" id="difficultyLevelLink">
+              <span>Dificulty Level<span>
+            </a>
+			</li> 
+		  </ul>
 
-			<a href="technology.html">
-				<span>Technologies</span>
-			</a>
-
-			<a href="difficultyLevel.html" id="difficultyLevelLink">
-				<span>Dificulty Level
-					<span>
-			</a>
-		</nav>
-
-	</header>
+        </header>
 	<div style="padding-top: 70px">
 		<div class="control">
 			<h2>Difficulty Levels</h2>
@@ -77,6 +87,20 @@
 		<div class="list" id="list">
 			<input type="text" name="search" placeholder="Search.." class="search" id="searchBtn">
 			<h2>Difficulty Levels List</h2>
+						<div id="myModal" class="modal">
+			  <div class="modal-content">
+				<span class="close">&times;</span>
+				<h1>Update a Difficulty Level </h1>
+				<div class="form">
+				  <fieldset>
+					<label for="technologies"> Name: </label>
+					<input id="technologies" type="text" name="name">
+					<button id="submitUpdateDif">Update</button>
+					<button id="cancelUpdateDif">Cancel</button>
+				  </fieldset>
+				</div>
+			  </div>
+		   </div>
 		</div>
 	</div>
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="

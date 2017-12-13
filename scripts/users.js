@@ -1,4 +1,6 @@
 $(document).ready(function () {
+	
+	
     searchUser();
     $('#submit').on('click', function () {
         addUser();
