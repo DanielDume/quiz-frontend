@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Create quiz </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" type="text/css" href="../styles/index.css">
+</head>
+<body background="../resources/difLevel.jpg">
+<header>
+
+    <ul class="nav">
+        <li>
+            <a href="index.html">
+                <span>Home</span>
+            </a>
+        </li>
+
+        <li>
+            <div class="dropdown">
+                <a href="#" class="drop-btn">Account</a>
+                <div class="dropdown-content">
+                    <a href="">Profile</a>
+                    <a href="login.html" onclick="window.localStorage.removeItem('token')">Logout</a>
+                </div>
+            </div>
+        </li>
+
+        <li>
+            <div class="dropdown">
+                <a href="#" class="drop-btn">Quiz</a>
+                        <div class="dropdown-content">
+                            <a href="takeQuiz.html">Take a Quiz</a>
+                            <a href="createQuiz.html">Create a Quiz</a>
+                            <a href="seeQuizzes.html">See all Quizzes</a>
+                        </div>
+            </div>
+        </li>
+
+        <li>
+            <a href="questions.html">
+                <span>Questions</span>
+            </a>
+        </li>
+
+
+        <li>
+            <a href="users.html">
+                <span>Users</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="technology.html">
+                <span>Technologies</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="difficultyLevel.html" id="difficultyLevelLink">
+                <span>Dificulty Level</span>
+            </a>
+        </li>
+    </ul>
+
+</header>
+
+<div style="padding-top: 70px">
+    
+    <div class="list createQuiz" id="list">
+        <input type="text" name="search" placeholder="Search.." class="search" id="searchBtn">
+        <h2>Questions List</h2>
+		
+		<h3> <input type="checkbox" name="vehicle" value="Bike"> I have a bike? </h3> <br>
+		<h3> <input type="checkbox" name="vehicle" value="Car" >  I have a car? </h3><br>
+		<h3> <input type="checkbox" name="vehicle" value="Cat" > I have a cat? </h3><br>
+		<h3> <input type="checkbox" name="vehicle" value="Cow" >  I have a cow? </h3><br>
+	
+		<div class="form">
+		<button id="submit" value="Submit">
+		Submit
+		</button>
+		</div>
+        <div id="myModal" class="modal" style="visibility: hidden;">
+            <div class="modal-content">
+                <!--<span class="close"-->
+                      <!--onclick="document.getElementById('myModal').style.visibility = 'hidden'">&times;</span>-->
+                <!--<h1>Update a question</h1>-->
+                <!--<div class="form">-->
+                    <!--<fieldset>-->
+                        <!--<label for="usernameUpdate"> Username: </label>-->
+                        <!--<input id="usernameUpdate" type="text">-->
+                        <!--<br/>-->
+                        <!--<br/>-->
+                        <!--<label for="firstNameUpdate"> First name: </label>-->
+                        <!--<input id="firstNameUpdate" type="text">-->
+                        <!--<br/>-->
+                        <!--<br/>-->
+                        <!--<label for="lastNameUpdate"> Last name: </label>-->
+                        <!--<input id="lastNameUpdate" type="text">-->
+                        <!--<br/>-->
+                        <!--<br/>-->
+                        <!--<label for="emailUpdate"> Email: </label>-->
+                        <!--<input id="emailUpdate" type="email">-->
+                        <!--<br/>-->
+                        <!--<br/>-->
+                        <!--<label for="passwordUpdate"> Password: </label>-->
+                        <!--<input id="passwordUpdate" type="text">-->
+                        <!--<button id="submitUpdateUsers"-->
+                                <!--onclick="updateUserRequest($(this).closest('article').attr('id'));hideUpdateModal();">-->
+                            <!--Update-->
+                        <!--</button>-->
+                        <!--<button id="cancelUpdateUsers"-->
+                                <!--onclick="document.getElementById('myModal').style.visibility = 'hidden'">Cancel-->
+                        <!--</button>-->
+                    <!--</fieldset>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../scripts/index.js"></script>
+<script src="../scripts/questions.js"></script>
+
+</html>
