@@ -110,8 +110,6 @@ function populateTechnologyList(data) {
 
 function addTechnology() {
     var name = $("#technologies").val();
-
-
     $.ajax({
         url: "https://quiz-shm.herokuapp.com/api/technologies",
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',

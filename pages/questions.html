@@ -32,11 +32,11 @@
             <div class="dropdown">
                 <a href="#" class="drop-btn">Quiz</a>
 
-                        <div class="dropdown-content">
-                            <a href="takeQuiz.html">Take a Quiz</a>
-                            <a href="createQuiz.html">Create a Quiz</a>
-                            <a href="seeQuizzes.html">See all Quizzes</a>
-                        </div>
+                <div class="dropdown-content">
+                    <a href="takeQuiz.html">Take a Quiz</a>
+                    <a href="createQuiz.html">Create a Quiz</a>
+                    <a href="seeQuizzes.html">See all Quizzes</a>
+                </div>
             </div>
         </li>
 
@@ -70,74 +70,68 @@
 
 <div style="padding-top: 70px">
     <div class="control">
-        <form style="width: 300px">
+        <div style="width: 300px">
             <fieldset>
                 <legend style="font-weight: bold">Add a new question</legend>
-                <div>
-                    <input type="radio" id="quizRadio" name="quizType" value="quizRadio">
-                    <label for="quizRadio">Quiz</label>
-                    <input type="radio" id="questionRadio" name="quizType" value="questionRadio">
-                    <label for="questionRadio">Question</label>
-                    <input type="radio" id="mapRadio" name = "quizType" value="mapRadio">
-                    <label for="mapRadio">Map</label>
-                </div>
-                <div id="quizInput" style="display: none">
-                    <label for="question1">Question:</label><input type="text" id="question1">
-                    <label for="answer1a">Answer A:</label><input type="text" id="answer1a">
-                    <label for="answer1b">Answer B:</label><input type="text" id="answer1b">
-                    <label for="answer1c">Answer C:</label><input type="text" id="answer1c">
-                    <label for="answer1d">Answer D:</label><input type="text" id="answer1d">
-                    <button id="submit1">Submit</button>
-                </div>
-                <div id="questionInput" style="display: none">
-                    <label for="question2">Question:</label><input type="text" id="question2">
-                    <label for="answer2">Answer:</label><input type="text" id="answer2">
-                    <button id="submit2">Submit</button>
-                </div>
-                <div id="mapInput" style="display: none">
-                    Not yet implemented
+                <div id="quizInput">
+                    <label for="question">Question:</label><input type="text" id="question">
+                    <label for="answera">A</label>
+                    <input type="text" id="answera">
+                    <input type="checkbox" id="checkbox1" value="Correct?" title="checkbox1"><br/>
+
+                    <label for="answerb">B</label>
+                    <input type="text" id="answerb">
+                    <input type="checkbox" id="checkbox2" value="Correct?" title="checkbox1"><br/>
+
+                    <label for="answerc">C</label>
+                    <input type="text" id="answerc">
+                    <input type="checkbox" id="checkbox3" value="Correct?" title="checkbox1"><br/>
+
+
+                    <label for="answerd">D</label>
+                    <input type="text" id="answerd">
+                    <input type="checkbox" id="checkbox4" value="Correct?" title="checkbox1"><br/>
+
+                    <label for="technology">Tech</label>
+                    <select id="technology">
+                    </select>
+                    <br/>
+
+                    <label for="difficulty">Diff</label>
+                    <select id="difficulty">
+                    </select>
+                    <br/>
+
+                    <button id="submit">Submit</button>
                 </div>
             </fieldset>
-        </form>
+        </div>
     </div>
 
     <div class="list" id="list">
         <input type="text" name="search" placeholder="Search.." class="search" id="searchBtn">
         <h2>Questions List</h2>
-        <div id="myModal" class="modal" style="visibility: hidden;">
+        <article id="questionsList">
+            <h3 class="technology-name">Name</h3>
+        </article>
+        <div id="myModal" class="modal" style="visibility:hidden">
             <div class="modal-content">
-                <!--<span class="close"-->
-                      <!--onclick="document.getElementById('myModal').style.visibility = 'hidden'">&times;</span>-->
-                <!--<h1>Update a question</h1>-->
-                <!--<div class="form">-->
-                    <!--<fieldset>-->
-                        <!--<label for="usernameUpdate"> Username: </label>-->
-                        <!--<input id="usernameUpdate" type="text">-->
-                        <!--<br/>-->
-                        <!--<br/>-->
-                        <!--<label for="firstNameUpdate"> First name: </label>-->
-                        <!--<input id="firstNameUpdate" type="text">-->
-                        <!--<br/>-->
-                        <!--<br/>-->
-                        <!--<label for="lastNameUpdate"> Last name: </label>-->
-                        <!--<input id="lastNameUpdate" type="text">-->
-                        <!--<br/>-->
-                        <!--<br/>-->
-                        <!--<label for="emailUpdate"> Email: </label>-->
-                        <!--<input id="emailUpdate" type="email">-->
-                        <!--<br/>-->
-                        <!--<br/>-->
-                        <!--<label for="passwordUpdate"> Password: </label>-->
-                        <!--<input id="passwordUpdate" type="text">-->
-                        <!--<button id="submitUpdateUsers"-->
-                                <!--onclick="updateUserRequest($(this).closest('article').attr('id'));hideUpdateModal();">-->
-                            <!--Update-->
-                        <!--</button>-->
-                        <!--<button id="cancelUpdateUsers"-->
-                                <!--onclick="document.getElementById('myModal').style.visibility = 'hidden'">Cancel-->
-                        <!--</button>-->
-                    <!--</fieldset>-->
-                <!--</div>-->
+            <span class="close"
+                  onclick="document.getElementById('myModal').style.visibility = 'hidden'">&times;</span>
+                <h1>Update a technology </h1>
+                <div class="form">
+                    <fieldset>
+                        <label for="questionsModal"> Name: </label>
+                        <input id="questionsModal" type="text" name="name">
+                        <button id="submitUpdateQuestion"
+                                onclick="">
+                            Update
+                        </button>
+                        <button id="cancelUpdateTeh"
+                                onclick="document.getElementById('myModal').style.visibility = 'hidden'">Cancel
+                        </button>
+                    </fieldset>
+                </div>
             </div>
         </div>
     </div>

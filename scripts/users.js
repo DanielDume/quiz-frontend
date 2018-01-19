@@ -1,7 +1,10 @@
 try_authenticate();
 
-function showUpdateModal() {
-    document.getElementById("myModal").style.visibility = "visible";
+function showUpdateModal(id) {
+    var modal = document.getElementById("myModal");
+    modal.style.visibility = "visible";
+    document.getElementById("aidi").innerHTML = id;
+
 }
 
 function hideUpdateModal() {
@@ -10,38 +13,65 @@ function hideUpdateModal() {
 
 function addUser() {
     console.log("ENTERED ADD");
-    var token = window.localStorage.getItem("token");
-    var username = $("#username").val(), firstName = $("#firstName").val(), lastName = $("#lastName").val(),
-        email = $("#email").val(), password = $("#password").val();
-    console.log(username, firstName, lastName, email, password);
+    var username = $("#usernameAdd").val(), firstName = $("#firstNameAdd").val(), lastName = $("#lastNameAdd").val(),
+        email = $("#emailAdd").val(), password = $("#passwordAdd").val(), role = $("#roleAdd").val();
+    console.log(username, firstName, lastName, email, password, role);
     $.ajax({
         url: 'https://quiz-shm.herokuapp.com/api/users',
         method: "POST",
-        headers: {'x-access-token': token},
+        headers: {'x-access-token': window.localStorage.getItem("token")},
         contentType: "application/x-www-form-urlencoded",
-        data: {username: username, firstName: firstName, lastName: lastName, email: email, password: password}, // put shit here
+        data: {
+            username: username,
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password,
+            role: role
+        },
         success: function (data) {
-            $("#username").val("");
-            $("#firstName").val("");
-            $("#lastName").val("");
-            $("#email").val("");
-            $("#password").val("");
             console.log(data);
         },
-        error: function () {
-            console.log("BAD SHIT");
+        error: function (data) {
+            if(JSON.stringify(data['responseJSON']['errors']))
+                alert(JSON.stringify(data['responseJSON']['errors']));
+            else
+                if(JSON.stringify(data['responseJSON']['message']).search('duplicate') !== -1)
+                    alert("This user already exists! Please choose other username!");
+                else
+                    alert(JSON.stringify(data));
         }
     });
 }
 
-function updateUserRequest() {
-
+function updateUserRequest(id) {
+    var token = window.localStorage.getItem("token");
+    $.ajax({
+        url: 'https://quiz-shm.herokuapp.com/api/users/' + id,
+        method: "PUT",
+        headers: {'x-access-token': token},
+        contentType: "application/x-www-form-urlencoded",
+        data: {
+            firstName: $("#firstNameUpdate").val(), lastName: $("#lastNameUpdate").val(), email: $("#emailUpdate").val(),
+            password: $("#passwordUpdate").val(), role: $("#roleUpdate").val()
+        },
+        success: function () {
+            searchUser();
+        },
+        error: function (data) {
+            if(JSON.stringify(data['responseText']).search('Role') !== -1)
+                alert(JSON.stringify(data['responseText']));
+            else
+                alert(JSON.stringify(data));
+        }
+    })
 }
 
 function searchUser() {
     $("article", "#list").remove();
     var name = $("#searchBtn").val();
     $.ajax({
+        async: false,
         url: 'https://quiz-shm.herokuapp.com/api/users',
         headers: {'x-access-token': window.localStorage.getItem("token")},
         contentType: "application/x-www-form-urlencoded",
@@ -55,8 +85,9 @@ function searchUser() {
                     item.firstName + ' ' + item.lastName +
                     '</h3><h4 class="user-role">' +
                     item.username + '</h4>' + '<h4 class="user-role">' +
-                    item.role +
-                    "</h4><button id=deleteButton> Delete </button><button id=updateButton onclick='showUpdateModal(this)' > Update </button></article > ";
+                    item.role + "</h4><button id=deleteButton> Delete " +
+                    '</button><button id=updateButton onclick="showUpdateModal(\''+item._id+'\')"> ' +
+                    "Update </button></article >";
                 $("#list").append(row);
             });
         },
@@ -88,9 +119,9 @@ $(document).ready(function () {
                 $(this).parent().remove();
                 searchUser();
             },
-            error: function () {
+            error: function (data) {
                 alert("Failed to delete, check console");
-                console.log("BAD SHIT");
+                alert(data);
             }
         });
     });

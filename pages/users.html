@@ -31,11 +31,11 @@
         <li>
             <div class="dropdown">
                 <a href="#" class="drop-btn">Quiz</a>
-                        <div class="dropdown-content">
-                            <a href="takeQuiz.html">Take a Quiz</a>
-                            <a href="createQuiz.html">Create a Quiz</a>
-                            <a href="seeQuizzes.html">See all Quizzes</a>
-                        </div>
+                <div class="dropdown-content">
+                    <a href="takeQuiz.html">Take a Quiz</a>
+                    <a href="createQuiz.html">Create a Quiz</a>
+                    <a href="seeQuizzes.html">See all Quizzes</a>
+                </div>
             </div>
         </li>
 
@@ -89,6 +89,10 @@
                 <br/>
                 <label for="passwordAdd"> Password: </label>
                 <input id="passwordAdd" type="text">
+                <br/>
+                <br/>
+                <label for="roleAdd"> Role(ADMIN, HR, RECRUITER, EXAMINEE): </label>
+                <input id="roleAdd" type="text">
                 <button id="submit">Submit</button>
             </fieldset>
         </div>
@@ -104,10 +108,7 @@
                 <h1>Update a user </h1>
                 <div class="form">
                     <fieldset>
-                        <label for="usernameUpdate"> Username: </label>
-                        <input id="usernameUpdate" type="text">
-                        <br/>
-                        <br/>
+                        <div style="visibility:hidden" id="aidi"></div>
                         <label for="firstNameUpdate"> First name: </label>
                         <input id="firstNameUpdate" type="text">
                         <br/>
@@ -122,8 +123,12 @@
                         <br/>
                         <label for="passwordUpdate"> Password: </label>
                         <input id="passwordUpdate" type="text">
+                        <br/>
+                        <br/>
+                        <label for="roleUpdate"> Role: </label>
+                        <input id="roleUpdate" type="text">
                         <button id="submitUpdateUsers"
-                                onclick="updateUserRequest($(this).closest('article').attr('id'));hideUpdateModal();">
+                                onclick="updateUserRequest(document.getElementById('aidi').innerHTML);hideUpdateModal();">
                             Update
                         </button>
                         <button id="cancelUpdateUsers"
