@@ -1,3 +1,5 @@
+var server_url = "https://quiz-shm.herokuapp.com";
+
 function showUpdateModal() {
     document.getElementById("myModal").style.visibility = "visible";
 }
@@ -10,7 +12,7 @@ function addDifficultyLevel() {
     console.log("ENTERED ADD");
     var name = $("#name").val();
     $.ajax({
-        url: 'https://quiz-shm.herokuapp.com/api/difficulties',
+        url: server_url + '/api/difficulties',
         method: "POST",
         headers: { 'x-access-token': window.localStorage.getItem("token") },
         data: { name: name },
@@ -30,7 +32,7 @@ function searchDifficultyLevel() {
     var name = $("#searchBtn").val();
     var token = window.localStorage.getItem("token");
     $.ajax({
-        url: 'https://quiz-shm.herokuapp.com/api/difficulties',
+        url: server_url + '/api/difficulties',
         headers: { 'x-access-token': token },
         data: {name: name},
         success: function (data) {
@@ -64,7 +66,7 @@ $(document).ready(function () {
         var token = window.localStorage.getItem("token");
         $(this).parent().remove();
         $.ajax({
-            url: 'https://quiz-shm.herokuapp.com/api/difficulties/' + id,
+            url: server_url + '/api/difficulties/' + id,
             method: "DELETE",
             headers: { 'x-access-token': token },
             success: function () {

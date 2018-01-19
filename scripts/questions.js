@@ -1,3 +1,4 @@
+var server_url = "https://quiz-shm.herokuapp.com";
 try_authenticate();
 
 function showUpdateModal(id) {
@@ -45,7 +46,7 @@ function addQuestion() {
     var difficultySelect = document.getElementById("difficulty");
     var difficultyId = difficultySelect.options[difficultySelect.selectedIndex].value;
     $.ajax({
-        url: 'https://quiz-shm.herokuapp.com/api/questions',
+        url: server_url + '/api/questions',
         method: "POST",
         headers: {'x-access-token': window.localStorage.getItem("token")},
         contentType: "application/x-www-form-urlencoded",
@@ -59,7 +60,7 @@ function addQuestion() {
         },
         success: function (data) {
             console.log(data);
-            searchQuestion();
+            getQuestions();
         },
         error: function (data) {
             console.log(data);
@@ -71,7 +72,7 @@ function addQuestion() {
 function updateQuestionRequest(id) {
     var token = window.localStorage.getItem("token");
     $.ajax({
-        url: 'https://quiz-shm.herokuapp.com/api/questions/' + id,
+        url: server_url + '/api/questions/' + id,
         method: "PUT",
         headers: {'x-access-token': token},
         contentType: "application/x-www-form-urlencoded",
@@ -83,7 +84,7 @@ function updateQuestionRequest(id) {
             role: $("#roleUpdate").val()
         },
         success: function () {
-            searchQuestion();
+            getQuestions();
         },
         error: function (data) {
             if (JSON.stringify(data['responseText']).search('Role') !== -1)
@@ -94,15 +95,13 @@ function updateQuestionRequest(id) {
     })
 }
 
-function searchQuestion() {
+function getQuestions() {
     $("article", "#list").remove();
-    var name = $("#searchBtn").val();
     $.ajax({
-        async: false,
-        url: 'https://quiz-shm.herokuapp.com/api/questions',
+        url: server_url + '/api/questions',
         headers: {'x-access-token': window.localStorage.getItem("token")},
         contentType: "application/x-www-form-urlencoded",
-        data: {reuirements: name},
+        data: {},
         success: function (data) {
             console.log(data);
             var row = "";
@@ -111,8 +110,8 @@ function searchQuestion() {
                     item._id + '</p>' + '<h3 class="question-name">' +
                     item.requirements +
                     '</h3><h4 class="question-role">' + "Technology: " +
-                    item.technology + '</h4>' + '<h4 class="question-role">' + "Difficulty: " +
-                    item.difficultyLevel + "</h4><button id=deleteButton> Delete " +
+                    item.technology.name + '</h4>' + '<h4 class="question-role">' + "Difficulty: " +
+                    item.difficultyLevel.name + "</h4><button id=deleteButton> Delete " +
                     '</button><button id=updateButton onclick="showUpdateModal(\'' + item._id + '\')"> ' +
                     "Update </button></article >";
                 $("#list").append(row);
@@ -127,7 +126,7 @@ function searchQuestion() {
 function populateSelectTechnologies() {
     var select = document.getElementById("technology");
     $.ajax({
-        url: 'https://quiz-shm.herokuapp.com/api/technologies',
+        url: server_url + '/api/technologies',
         headers: {'x-access-token': window.localStorage.getItem("token")},
         success: function (data) {
             for (var i in data) {
@@ -146,7 +145,7 @@ function populateSelectTechnologies() {
 function populateSelectDifficulties() {
     var select = document.getElementById("difficulty");
     $.ajax({
-        url: 'https://quiz-shm.herokuapp.com/api/difficulties',
+        url: server_url + '/api/difficulties',
         headers: {'x-access-token': window.localStorage.getItem("token")},
         success: function (data) {
             for (var i in data) {
@@ -163,27 +162,24 @@ function populateSelectDifficulties() {
 }
 
 $(document).ready(function () {
-    searchQuestion();
+    getQuestions();
     populateSelectTechnologies();
     populateSelectDifficulties();
     $('#submit').on('click', function () {
         addQuestion();
     });
-    $('#searchBtn').keyup(function () {
-        searchQuestion();
-    });
     $("#list").on("click", 'article #deleteButton', function () {
         var id = $(this).parent().find('p')[0].innerText;
         var token = window.localStorage.getItem("token");
         $.ajax({
-            url: 'https://quiz-shm.herokuapp.com/api/questions/' + id,
+            url: server_url + '/api/questions/' + id,
             method: "DELETE",
             headers: {'x-access-token': token},
             contentType: "application/x-www-form-urlencoded",
             data: {id: id},
             success: function () {
                 $(this).parent().remove();
-                searchQuestion();
+                getQuestions();
             },
             error: function (data) {
                 alert("Failed to delete, check console");

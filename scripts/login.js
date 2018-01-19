@@ -1,3 +1,5 @@
+var server_url = server_url + '";
+
 $("#loginBtn").on("click", function () {
     authenticate();
 });
@@ -12,7 +14,7 @@ function authenticate() {
     var username = $("#usernameInput").val();
     var password = $("#passwordInput").val();
     $.ajax({
-        url: "https://quiz-shm.herokuapp.com/sign_in",
+        url: server_url + '/sign_in',
         contentType: "application/x-www-form-urlencoded",
         method: "POST",
         data: {"username": username, "password": password},

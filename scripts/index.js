@@ -1,4 +1,4 @@
-var url = "http://quiz-shm.herokuapp.com";
+var server_url = "http://quiz-shm.herokuapp.com";
 
 $(document).ready(function () {
     $('#header-icon').click(function (e) {
@@ -14,7 +14,7 @@ $(document).ready(function () {
 
 function try_authenticate() {
     $.ajax({
-        url: url + "/api",
+        url: server_url + "/api",
         method: "GET",
         contentType: "application/x-www-form-urlencoded",
         headers: {'x-access-token': window.localStorage.getItem("token")},

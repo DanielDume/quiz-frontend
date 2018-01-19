@@ -1,3 +1,5 @@
+var server_url = "https://quiz-shm.herokuapp.com";
+
 try_authenticate();
 
 function showUpdateModal(id) {
@@ -17,7 +19,7 @@ function addUser() {
         email = $("#emailAdd").val(), password = $("#passwordAdd").val(), role = $("#roleAdd").val();
     console.log(username, firstName, lastName, email, password, role);
     $.ajax({
-        url: 'https://quiz-shm.herokuapp.com/api/users',
+        url: server_url + '/api/users',
         method: "POST",
         headers: {'x-access-token': window.localStorage.getItem("token")},
         contentType: "application/x-www-form-urlencoded",
@@ -47,7 +49,7 @@ function addUser() {
 function updateUserRequest(id) {
     var token = window.localStorage.getItem("token");
     $.ajax({
-        url: 'https://quiz-shm.herokuapp.com/api/users/' + id,
+        url: server_url + '/api/users/' + id,
         method: "PUT",
         headers: {'x-access-token': token},
         contentType: "application/x-www-form-urlencoded",
@@ -72,7 +74,7 @@ function searchUser() {
     var name = $("#searchBtn").val();
     $.ajax({
         async: false,
-        url: 'https://quiz-shm.herokuapp.com/api/users',
+        url: server_url + '/api/users',
         headers: {'x-access-token': window.localStorage.getItem("token")},
         contentType: "application/x-www-form-urlencoded",
         data: {firstName: name},
@@ -110,7 +112,7 @@ $(document).ready(function () {
         var id = $(this).parent().find('p')[0].innerText;
         var token = window.localStorage.getItem("token");
         $.ajax({
-            url: 'https://quiz-shm.herokuapp.com/api/users/' + id,
+            url: server_url + '/api/users/' + id,
             method: "DELETE",
             headers: {'x-access-token': token},
             contentType: "application/x-www-form-urlencoded",

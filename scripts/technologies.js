@@ -1,3 +1,5 @@
+var server_url = "https://quiz-shm.herokuapp.com";
+
 $('#submit').on('click', function () {
 
     addTechnology();
@@ -7,7 +9,7 @@ $('#searchInput').on('keyup', function () {
     var name = $("#searchInput").val();
     delay(function () {
         $.ajax({
-            url: 'https://quiz-shm.herokuapp.com/api/technologies',
+            url: server_url + '/api/technologies',
             headers: {'x-access-token': window.localStorage.getItem("token")},
             success: function (data) {
                 var results = [];
@@ -55,7 +57,7 @@ function hideUpdateModal(){
 
 function deleteTechnologyRequest(id) {
     $.ajax({
-        url: 'https://quiz-shm.herokuapp.com/api/technologies/' + id,
+        url: server_url + '/api/technologies/' + id,
         headers: {'x-access-token': window.localStorage.getItem("token")},
         type: 'DELETE',
         success: function () {
@@ -69,7 +71,7 @@ function deleteTechnologyRequest(id) {
 
 function updateTechnologyRequest(id){
     $.ajax({
-        url: 'https://quiz-shm.herokuapp.com/api/technologies/' + id,
+        url: server_url + '/api/technologies/' + id,
         headers: {'x-access-token': window.localStorage.getItem("token")},
         type: 'PUT',
         data : {name: document.getElementById("technologiesModal").value},
@@ -85,7 +87,7 @@ function updateTechnologyRequest(id){
 
 function getAllTechnologies() {
     $.ajax({
-        url: 'https://quiz-shm.herokuapp.com/api/technologies',
+        url: server_url + '/api/technologies',
         headers: {'x-access-token': window.localStorage.getItem("token")},
         success: function (data) {
             $('#technologyList').empty();
@@ -111,7 +113,7 @@ function populateTechnologyList(data) {
 function addTechnology() {
     var name = $("#technologies").val();
     $.ajax({
-        url: "https://quiz-shm.herokuapp.com/api/technologies",
+        url: server_url + '/api/technologies',
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
         dataType: 'json',
         method: "POST",
