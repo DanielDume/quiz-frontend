@@ -1,5 +1,4 @@
 var server_url = "https://quiz-shm.herokuapp.com";
-try_authenticate();
 
 function showUpdateModal(id) {
     var modal = document.getElementById("myModal");

@@ -34,6 +34,7 @@ function searchDifficultyLevel() {
     $.ajax({
         url: server_url + '/api/difficulties',
         headers: { 'x-access-token': token },
+        async: false,
         data: {name: name},
         success: function (data) {
             var row = "";
