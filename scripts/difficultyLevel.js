@@ -1,7 +1,8 @@
 var server_url = "https://quiz-shm.herokuapp.com";
 
-function showUpdateModal() {
+function showUpdateModal(id) {
     document.getElementById("myModal").style.visibility = "visible";
+    document.getElementById("aidi").innerHTML = id;
 }
 
 function hideUpdateModal() {
@@ -14,17 +15,32 @@ function addDifficultyLevel() {
     $.ajax({
         url: server_url + '/api/difficulties',
         method: "POST",
-        headers: { 'x-access-token': window.localStorage.getItem("token") },
-        data: { name: name },
+        headers: {'x-access-token': window.localStorage.getItem("token")},
+        data: {name: name},
         success: function (data) {
             $("#name").val("");
             console.log(data);
             searchDifficultyLevel();
         },
         error: function () {
-            console.log("BAD SHIT");
+            console.log("error");
         }
     });
+}
+
+function updateDifficultyRequest(id) {
+    $.ajax({
+        url: server_url + '/api/difficulties/' + id,
+        headers: {'x-access-token': window.localStorage.getItem("token")},
+        type: 'PUT',
+        data: {name: document.getElementById("nameUpdate").value},
+        success: function () {
+            searchDifficultyLevel();
+        },
+        error: function () {
+            console.log("error Update");
+        }
+    })
 }
 
 function searchDifficultyLevel() {
@@ -33,7 +49,7 @@ function searchDifficultyLevel() {
     var token = window.localStorage.getItem("token");
     $.ajax({
         url: server_url + '/api/difficulties',
-        headers: { 'x-access-token': token },
+        headers: {'x-access-token': token},
         async: false,
         data: {name: name},
         success: function (data) {
@@ -41,17 +57,17 @@ function searchDifficultyLevel() {
             $.each(data, function (index, item) {
                 if (name === '' || item.name.startsWith(name)) {
                     row = '<article><h3 class="difLevel-name">' + item.name +
-                        '</h3><p style="display: none">' + item._id +
-                        "</p><button id=deleteButton> Detele </button><button id=updateButton onclick='showUpdateModal(this)'> Update </button></article>";
+                        '</h3><p style="display: none">' + item._id + "</p>" +
+                        "<button id=deleteButton> Delete </button>" +
+                        '<button id=updateButton onclick="showUpdateModal(\'' + item._id + '\')"> Update </button></article>';
                     $("#list").append(row);
                 }
             });
         },
         error: function () {
-            console.log("BAD SHIT");
+            console.log("error");
         }
     });
-
 }
 
 $(document).ready(function () {
@@ -69,14 +85,14 @@ $(document).ready(function () {
         $.ajax({
             url: server_url + '/api/difficulties/' + id,
             method: "DELETE",
-            headers: { 'x-access-token': token },
+            headers: {'x-access-token': token},
             success: function () {
                 $(this).parent().remove();
                 searchDifficultyLevel();
             },
             error: function () {
                 alert("Failed to delete, check console");
-                console.log("BAD SHIT");
+                console.log("error");
             }
         });
     });

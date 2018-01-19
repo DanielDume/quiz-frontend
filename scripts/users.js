@@ -94,7 +94,7 @@ function searchUser() {
             });
         },
         error: function () {
-            console.log("BAD SHIT");
+            console.log("error");
         }
     });
 }

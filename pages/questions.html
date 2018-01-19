@@ -115,11 +115,44 @@
             <div class="modal-content">
             <span class="close"
                   onclick="document.getElementById('myModal').style.visibility = 'hidden'">&times;</span>
-                <h1>Update a technology </h1>
+                <h1>Update a question </h1>
                 <div class="form">
                     <fieldset>
-                        <label for="questionsModal"> Name: </label>
-                        <input id="questionsModal" type="text" name="name">
+                        <div style="visibility:hidden" id="aidi"></div>
+
+                        <label for="nameUpdate"> Requirement: </label>
+                        <input id="nameUpdate" type="text" name="name">
+
+                        <label for="answeraUpdate">A: </label>
+                        <!--<input type="checkbox" id="checkbox1Update" value="Correct?" title="checkbox1"><br/>-->
+                        <input id="answeraUpdate" type="text" name="answer">
+
+                        <label for="answerbUpdate">B: </label>
+                        <!--<input type="checkbox" id="checkbox2Update" value="Correct?" title="checkbox2"><br/>-->
+                        <input id="answerbUpdate" type="text" name="answer">
+
+                        <label for="answercUpdate">C: </label>
+                        <!--<input type="checkbox" id="checkbox3Update" value="Correct?" title="checkbox3"><br/>-->
+                        <input id="answercUpdate" type="text" name="answer">
+
+                        <label for="answerdUpdate">D: </label>
+                        <!--<input type="checkbox" id="checkbox4Update" value="Correct?" title="checkbox4"><br/>-->
+                        <input id="answerdUpdate" type="text" name="answer">
+                        <br/>
+                        <br/>
+
+                        <label for="technologyUpdate">Tech</label>
+                        <select id="technologyUpdate">
+                        </select>
+                        <br/>
+                        <br/>
+
+                        <label for="difficultyUpdate">Diff</label>
+                        <select id="difficultyUpdate">
+                        </select>
+                        <br/>
+                        <br/>
+
                         <button id="submitUpdateQuestion"
                                 onclick="">
                             Update

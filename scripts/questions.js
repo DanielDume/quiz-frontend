@@ -1,4 +1,6 @@
 var server_url = "https://quiz-shm.herokuapp.com";
+var difficulties = [];
+var technologies = [];
 
 function showUpdateModal(id) {
     var modal = document.getElementById("myModal");
@@ -117,45 +119,55 @@ function getQuestions() {
             });
         },
         error: function () {
-            console.log("BAD SHIT");
+            console.log("error");
         }
     });
 }
 
 function populateSelectTechnologies() {
     var select = document.getElementById("technology");
+    var selectUpdate = document.getElementById("technologyUpdate");
     $.ajax({
         url: server_url + '/api/technologies',
         headers: {'x-access-token': window.localStorage.getItem("token")},
         success: function (data) {
             for (var i in data) {
-                var option = document.createElement("option");
-                option.innerHTML = data[i]['name'];
-                option.value = data[i]['_id'];
-                select.appendChild(option);
+                var option1 = document.createElement("option");
+                var option2 = document.createElement("option");
+                option1.innerHTML = data[i]['name'];
+                option1.value = data[i]['_id'];
+                option2.innerHTML = data[i]['name'];
+                option2.value = data[i]['_id'];
+                select.appendChild(option1);
+                selectUpdate.appendChild(option2);
             }
         },
         error: function () {
-            console.log("BAD SHIT");
+            console.log("error");
         }
     });
 }
 
 function populateSelectDifficulties() {
     var select = document.getElementById("difficulty");
+    var selectUpdate = document.getElementById("difficultyUpdate");
     $.ajax({
         url: server_url + '/api/difficulties',
         headers: {'x-access-token': window.localStorage.getItem("token")},
         success: function (data) {
             for (var i in data) {
-                var option = document.createElement("option");
-                option.innerHTML = data[i]['name'];
-                option.value = data[i]['_id'];
-                select.appendChild(option);
+                var option1 = document.createElement("option");
+                var option2 = document.createElement("option");
+                option1.innerHTML = data[i]['name'];
+                option1.value = data[i]['_id'];
+                option2.innerHTML = data[i]['name'];
+                option2.value = data[i]['_id'];
+                select.appendChild(option1);
+                selectUpdate.appendChild(option2);
             }
         },
         error: function () {
-            console.log("BAD SHIT");
+            console.log("error");
         }
     })
 }

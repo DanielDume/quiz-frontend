@@ -11,7 +11,6 @@
 
 <body background="../resources/difLevel.jpg">
 <header>
-
     <ul class="nav">
         <li>
             <a href="index.html">
@@ -90,10 +89,12 @@
                 <h1>Update a Difficulty Level </h1>
                 <div class="form">
                     <fieldset>
-                        <label for="technologies"> Name: </label>
-                        <input id="technologies" type="text" name="name">
-                        <button id="submitUpdateDif">Update</button>
-                        <button id="cancelUpdateDif" onclick="hideUpdateModal()">Cancel</button>
+                        <div style="visibility:hidden" id="aidi"></div>
+                        <label for="nameUpdate"> Name: </label>
+                        <input id="nameUpdate" type="text" name="name">
+                        <button id="submitUpdateDif"
+                                onclick="updateDifficultyRequest(document.getElementById('aidi').innerHTML);hideUpdateModal();">Update</button>
+                        <button id="cancelUpdateDif" onclick="hideUpdateModal();">Cancel</button>
                     </fieldset>
                 </div>
             </div>

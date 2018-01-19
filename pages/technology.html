@@ -89,10 +89,11 @@
                 <h1>Update a technology </h1>
                 <div class="form">
                     <fieldset>
-                        <label for="technologiesModal"> Name: </label>
-                        <input id="technologiesModal" type="text" name="name">
+                        <div style="visibility:hidden" id="aidi"></div>
+                        <label for="nameUpdate"> Name: </label>
+                        <input id="nameUpdate" type="text" name="name">
                         <button id="submitUpdateTeh"
-                                onclick="updateTechnologyRequest($(this).closest('article').attr('id'));hideUpdateModal();">
+                                onclick="updateTechnologyRequest(document.getElementById('aidi').innerHTML);hideUpdateModal();">
                             Update
                         </button>
                         <button id="cancelUpdateTeh"
@@ -107,7 +108,7 @@
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="../scripts/index.js"></script>
-<script src="../scripts/technologies.js"></script>
+<script src="../scripts/technology.js"></script>
 
 </body>
 

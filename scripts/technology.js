@@ -8,32 +8,13 @@ $(document).ready(function () {
     getAllTechnologies();
 });
 
-function deleteTechnologyEntry(element) {
-    var articleElement = $(element).closest("article");
-    var idTechnology = articleElement.attr('id');
-    deleteTechnologyRequest(idTechnology);
-}
-
-function showUpdateModal() {
+function showUpdateModal(id) {
     document.getElementById("myModal").style.visibility = "visible";
+    document.getElementById("aidi").innerHTML = id;
 }
 
 function hideUpdateModal(){
     document.getElementById("myModal").style.visibility = "hidden";
-}
-
-function deleteTechnologyRequest(id) {
-    $.ajax({
-        url: server_url + '/api/technologies/' + id,
-        headers: {'x-access-token': window.localStorage.getItem("token")},
-        type: 'DELETE',
-        success: function () {
-            getAllTechnologies();
-        },
-        error: function () {
-            console.log("BAD SHIT Delete");
-        }
-    });
 }
 
 function updateTechnologyRequest(id){
@@ -41,16 +22,15 @@ function updateTechnologyRequest(id){
         url: server_url + '/api/technologies/' + id,
         headers: {'x-access-token': window.localStorage.getItem("token")},
         type: 'PUT',
-        data : {name: document.getElementById("technologiesModal").value},
+        data : {name: document.getElementById("nameUpdate").value},
         success: function(){
             getAllTechnologies();
         },
         error: function(){
-            console.log("BAD SHIT Update");
+            console.log("error Update");
         }
     })
 }
-
 
 function getAllTechnologies() {
     $.ajax({
@@ -61,20 +41,22 @@ function getAllTechnologies() {
             populateTechnologyList(data);
         },
         error: function () {
-            console.log("BAD SHIT");
+            console.log("error");
         }
     });
 }
 
 function populateTechnologyList(data) {
-    var unorderedList = $('#technologyList');
-    var html = "";
-    $.each(data, function (index, value) {
-        html += '<article id=' + value._id + '><h3>' + value.name + "<button onclick='deleteTechnologyEntry(this)'  class='btnTechnologies'>Delete</button><button onclick='showUpdateModal(this)' class='btnTechnologies'>Update</button></h3></article>";
+    var row = "";
+    $.each(data, function (index, item) {
+        row = '<article>' + '<p style="display: none">' +
+            item._id + '</p>' + '<h3 class="technology-name"/>' +
+            "<h3>" + item.name + "</h3>"+
+            "</h4><button id=deleteButton> Delete " +
+            '</button><button id=updateButton onclick="showUpdateModal(\''+item._id+'\')"> ' +
+            "Update </button></article >";
+        $("#technologyList").append(row);
     });
-    unorderedList.html(html);
-
-
 }
 
 function addTechnology() {
@@ -98,3 +80,25 @@ function addTechnology() {
     });
 
 }
+
+$(document).ready(function () {
+    $("#technologyList").on("click", 'article #deleteButton', function () {
+        var id = $(this).parent().find('p')[0].innerText;
+        var token = window.localStorage.getItem("token");
+        $.ajax({
+            url: server_url + '/api/technologies/' + id,
+            method: "DELETE",
+            headers: {'x-access-token': token},
+            contentType: "application/x-www-form-urlencoded",
+            data: {id: id},
+            success: function () {
+                $(this).parent().remove();
+                getAllTechnologies()
+            },
+            error: function (data) {
+                alert("Failed to delete, check console");
+                alert(data);
+            }
+        });
+    });
+});
