@@ -9,11 +9,27 @@ function hideUpdateModal() {
     document.getElementById("myModal").style.visibility = "hidden";
 }
 
+function compare1(a,b) {
+    if (a['difficultyLevel']['name'] < b['difficultyLevel']['name'])
+        return -1;
+    if (a['difficultyLevel']['name'] > b['difficultyLevel']['name'])
+        return 1;
+    return 0;
+}
+
+function compare2(a,b) {
+    if (a['technology']['name'] < b['technology']['name'])
+        return -1;
+    if (a['technology']['name'] > b['technology']['name'])
+        return 1;
+    return 0;
+}
+
 function addQuestion() {
     var question = $("#question").val(), answera = $("#answera").val(), answerb = $("#answerb").val(),
         answerc = $("#answerc").val(), answerd = $("#answerd").val();
-    var rightAnswers = Array();
-    var wrongAnswers = Array();
+    var rightAnswers = [];
+    var wrongAnswers = [];
     if (document.getElementById('checkbox1').checked) {
         rightAnswers.push(answera);
     }
@@ -45,6 +61,13 @@ function addQuestion() {
     var difficultyId = difficultySelect.options[difficultySelect.selectedIndex].value;
 
     var timeToAnswer = $("#timeToAnswer").val();
+
+    alert(JSON.stringify({technologyId: technologyId,
+        difficultyLevelId: difficultyId,
+        requirements: question,
+        rightAnswers: rightAnswers,
+        wrongAnswers: wrongAnswers,
+        timeToAnswer: timeToAnswer}));
     $.ajax({
         url: server_url + '/api/questions',
         method: "POST",
@@ -141,6 +164,12 @@ function getQuestions() {
         data: {},
         success: function (data) {
             console.log(data);
+            if(document.getElementById('filterDifficulty').checked) {
+                data = data.sort(compare1);
+            }
+            if(document.getElementById('filterTechnology').checked){
+                data = data.sort(compare2);
+            }
             var row = "";
             $.each(data, function (index, item) {
                 row = '<article>' + '<p style="display: none">' +
@@ -214,6 +243,12 @@ $(document).ready(function () {
     populateSelectDifficulties();
     $('#submit').on('click', function () {
         addQuestion();
+    });
+    $('#filterTechnology').change(function() {
+        getQuestions();
+    });
+    $('#filterDifficulty').change(function() {
+        getQuestions();
     });
     $("#list").on("click", 'article #deleteButton', function () {
         var id = $(this).parent().find('p')[0].innerText;
