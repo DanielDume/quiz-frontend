@@ -10,7 +10,6 @@
 </head>
 <body background="../resources/difLevel.jpg">
 <header>
-
     <ul class="nav">
         <li>
             <a href="index.html">
@@ -72,33 +71,43 @@
             <fieldset>
                 <legend style="font-weight: bold">Add a new question</legend>
                 <div id="quizInput">
-                    <label for="question">Question:</label><input type="text" id="question">
+                    <label for="question">Question:</label>
+                    <input type="text" id="question">
+                    <br/><br/>
+
                     <label for="answera">A</label>
                     <input type="text" id="answera">
                     <input type="checkbox" id="checkbox1" value="Correct?" title="checkbox1"><br/>
+                    <br/><br/>
 
                     <label for="answerb">B</label>
                     <input type="text" id="answerb">
                     <input type="checkbox" id="checkbox2" value="Correct?" title="checkbox1"><br/>
+                    <br/><br/>
 
                     <label for="answerc">C</label>
                     <input type="text" id="answerc">
                     <input type="checkbox" id="checkbox3" value="Correct?" title="checkbox1"><br/>
-
+                    <br/><br/>
 
                     <label for="answerd">D</label>
                     <input type="text" id="answerd">
                     <input type="checkbox" id="checkbox4" value="Correct?" title="checkbox1"><br/>
+                    <br/><br/>
+
+                    <label for="timeToAnswer">Time to answer</label>
+                    <input type="text" id="timeToAnswer">
+                    <br/><br/>
 
                     <label for="technology">Tech</label>
                     <select id="technology">
                     </select>
-                    <br/>
+                    <br/><br/>
 
                     <label for="difficulty">Diff</label>
                     <select id="difficulty">
                     </select>
-                    <br/>
+                    <br/><br/>
 
                     <button id="submit">Submit</button>
                 </div>
@@ -116,49 +125,56 @@
             <span class="close"
                   onclick="document.getElementById('myModal').style.visibility = 'hidden'">&times;</span>
                 <h1>Update a question </h1>
-                <div class="form">
+                <div>
                     <fieldset>
                         <div style="visibility:hidden" id="aidi"></div>
 
-                        <label for="nameUpdate"> Requirement: </label>
-                        <input id="nameUpdate" type="text" name="name">
+                        <label for="requirementsUpdate"> Requirements: </label>
+                        <input id="requirementsUpdate" type="text" name="name">
+                        <br/><br/>
 
                         <label for="answeraUpdate">A: </label>
-                        <!--<input type="checkbox" id="checkbox1Update" value="Correct?" title="checkbox1"><br/>-->
                         <input id="answeraUpdate" type="text" name="answer">
+                        <input type="checkbox" id="checkbox1Update" value="Correct?" title="checkbox1">
+                        <br/><br/>
 
                         <label for="answerbUpdate">B: </label>
-                        <!--<input type="checkbox" id="checkbox2Update" value="Correct?" title="checkbox2"><br/>-->
                         <input id="answerbUpdate" type="text" name="answer">
+                        <input type="checkbox" id="checkbox2Update" value="Correct?" title="checkbox2">
+                        <br/><br/>
 
                         <label for="answercUpdate">C: </label>
-                        <!--<input type="checkbox" id="checkbox3Update" value="Correct?" title="checkbox3"><br/>-->
                         <input id="answercUpdate" type="text" name="answer">
+                        <input type="checkbox" id="checkbox3Update" value="Correct?" title="checkbox3">
+                        <br/><br/>
 
                         <label for="answerdUpdate">D: </label>
-                        <!--<input type="checkbox" id="checkbox4Update" value="Correct?" title="checkbox4"><br/>-->
                         <input id="answerdUpdate" type="text" name="answer">
-                        <br/>
-                        <br/>
+                        <input type="checkbox" id="checkbox4Update" value="Correct?" title="checkbox4">
+                        <br/><br/>
+
+                        <label for="timeToAnswerUpdate">Time to answer</label>
+                        <input type="text" id="timeToAnswerUpdate">
+                        <br/><br/>
 
                         <label for="technologyUpdate">Tech</label>
                         <select id="technologyUpdate">
                         </select>
-                        <br/>
-                        <br/>
+                        <br/><br/>
+
 
                         <label for="difficultyUpdate">Diff</label>
                         <select id="difficultyUpdate">
                         </select>
-                        <br/>
-                        <br/>
+                        <br/><br/>
+
 
                         <button id="submitUpdateQuestion"
-                                onclick="">
+                                onclick="updateQuestionRequest(document.getElementById('aidi').innerHTML);hideUpdateModal();">
                             Update
                         </button>
                         <button id="cancelUpdateTeh"
-                                onclick="document.getElementById('myModal').style.visibility = 'hidden'">Cancel
+                                onclick="hideUpdateModal()">Cancel
                         </button>
                     </fieldset>
                 </div>

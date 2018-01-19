@@ -1,10 +1,7 @@
 var server_url = "https://quiz-shm.herokuapp.com";
-var difficulties = [];
-var technologies = [];
 
 function showUpdateModal(id) {
-    var modal = document.getElementById("myModal");
-    modal.style.visibility = "visible";
+    document.getElementById("myModal").style.visibility = "visible";
     document.getElementById("aidi").innerHTML = id;
 }
 
@@ -46,6 +43,8 @@ function addQuestion() {
 
     var difficultySelect = document.getElementById("difficulty");
     var difficultyId = difficultySelect.options[difficultySelect.selectedIndex].value;
+
+    var timeToAnswer = $("#timeToAnswer").val();
     $.ajax({
         url: server_url + '/api/questions',
         method: "POST",
@@ -57,7 +56,7 @@ function addQuestion() {
             requirements: question,
             rightAnswers: rightAnswers,
             wrongAnswers: wrongAnswers,
-            timeToAnswer: 100000
+            timeToAnswer: timeToAnswer
         },
         success: function (data) {
             console.log(data);
@@ -71,18 +70,55 @@ function addQuestion() {
 }
 
 function updateQuestionRequest(id) {
-    var token = window.localStorage.getItem("token");
+    var requirements = $("#requirementsUpdate").val();
+    var answera = $("#answeraUpdate").val();
+    var answerb = $("#answerbUpdate").val();
+    var answerc = $("#answercUpdate").val();
+    var answerd = $("#answerdUpdate").val();
+    var timeToAnswer = $("#timeToAnswerUpdate").val();
+    var rightAnswers = Array();
+    var wrongAnswers = Array();
+    if (document.getElementById('checkbox1Update').checked) {
+        rightAnswers.push(answera);
+    }
+    else {
+        wrongAnswers.push(answera);
+    }
+    if (document.getElementById('checkbox2Update').checked) {
+        rightAnswers.push(answerb);
+    }
+    else {
+        wrongAnswers.push(answerb);
+    }
+    if (document.getElementById('checkbox3Update').checked) {
+        rightAnswers.push(answerc);
+    }
+    else {
+        wrongAnswers.push(answerc);
+    }
+    if (document.getElementById('checkbox4Update').checked) {
+        rightAnswers.push(answerd);
+    }
+    else {
+        wrongAnswers.push(answerd);
+    }
+    var technologySelect = document.getElementById("technologyUpdate");
+    var technologyId = technologySelect.options[technologySelect.selectedIndex].value;
+
+    var difficultySelect = document.getElementById("difficultyUpdate");
+    var difficultyId = difficultySelect.options[difficultySelect.selectedIndex].value;
     $.ajax({
         url: server_url + '/api/questions/' + id,
         method: "PUT",
-        headers: {'x-access-token': token},
+        headers: {'x-access-token': window.localStorage.getItem("token")},
         contentType: "application/x-www-form-urlencoded",
         data: {
-            firstName: $("#firstNameUpdate").val(),
-            lastName: $("#lastNameUpdate").val(),
-            email: $("#emailUpdate").val(),
-            password: $("#passwordUpdate").val(),
-            role: $("#roleUpdate").val()
+            requirements: requirements,
+            difficultyLevelId: difficultyId,
+            technologyId: technologyId,
+            rightAnswers: rightAnswers,
+            wrongAnswers: wrongAnswers,
+            timeToAnswer: timeToAnswer
         },
         success: function () {
             getQuestions();
@@ -181,11 +217,10 @@ $(document).ready(function () {
     });
     $("#list").on("click", 'article #deleteButton', function () {
         var id = $(this).parent().find('p')[0].innerText;
-        var token = window.localStorage.getItem("token");
         $.ajax({
             url: server_url + '/api/questions/' + id,
             method: "DELETE",
-            headers: {'x-access-token': token},
+            headers: {'x-access-token': window.localStorage.getItem("token")},
             contentType: "application/x-www-form-urlencoded",
             data: {id: id},
             success: function () {

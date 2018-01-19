@@ -47,11 +47,10 @@ function addUser() {
 }
 
 function updateUserRequest(id) {
-    var token = window.localStorage.getItem("token");
     $.ajax({
         url: server_url + '/api/users/' + id,
         method: "PUT",
-        headers: {'x-access-token': token},
+        headers: {'x-access-token': window.localStorage.getItem("token")},
         contentType: "application/x-www-form-urlencoded",
         data: {
             firstName: $("#firstNameUpdate").val(), lastName: $("#lastNameUpdate").val(), email: $("#emailUpdate").val(),
@@ -110,11 +109,10 @@ $(document).ready(function () {
     });
     $("#list").on("click", 'article #deleteButton', function () {
         var id = $(this).parent().find('p')[0].innerText;
-        var token = window.localStorage.getItem("token");
         $.ajax({
             url: server_url + '/api/users/' + id,
             method: "DELETE",
-            headers: {'x-access-token': token},
+            headers: {'x-access-token': window.localStorage.getItem("token")},
             contentType: "application/x-www-form-urlencoded",
             data: {id: id},
             success: function () {

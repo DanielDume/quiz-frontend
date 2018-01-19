@@ -46,10 +46,9 @@ function updateDifficultyRequest(id) {
 function searchDifficultyLevel() {
     $("article", "#list").remove();
     var name = $("#searchBtn").val();
-    var token = window.localStorage.getItem("token");
     $.ajax({
         url: server_url + '/api/difficulties',
-        headers: {'x-access-token': token},
+        headers: {'x-access-token': window.localStorage.getItem("token")},
         async: false,
         data: {name: name},
         success: function (data) {
@@ -80,12 +79,11 @@ $(document).ready(function () {
     });
     $("#list").on("click", 'article #deleteButton', function () {
         var id = $(this).parent().find('p')[0].innerText;
-        var token = window.localStorage.getItem("token");
         $(this).parent().remove();
         $.ajax({
             url: server_url + '/api/difficulties/' + id,
             method: "DELETE",
-            headers: {'x-access-token': token},
+            headers: {'x-access-token': window.localStorage.getItem("token")},
             success: function () {
                 $(this).parent().remove();
                 searchDifficultyLevel();

@@ -84,11 +84,10 @@ function addTechnology() {
 $(document).ready(function () {
     $("#technologyList").on("click", 'article #deleteButton', function () {
         var id = $(this).parent().find('p')[0].innerText;
-        var token = window.localStorage.getItem("token");
         $.ajax({
             url: server_url + '/api/technologies/' + id,
             method: "DELETE",
-            headers: {'x-access-token': token},
+            headers: {'x-access-token': window.localStorage.getItem("token")},
             contentType: "application/x-www-form-urlencoded",
             data: {id: id},
             success: function () {
