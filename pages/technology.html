@@ -2,93 +2,109 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <title>Technologies</title>
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-  <link rel="stylesheet" href="../styles/style.css">
-  <link rel="stylesheet" type="text/css" href="../styles/index.css">
-  <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-    crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>Technologies</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" type="text/css" href="../styles/index.css">
 </head>
+<body background="../resources/tech.jpg">
+<header>
 
-<body>
+    <ul class="nav">
+        <li>
+            <a href="index.html">
+                <span>Home</span>
+            </a>
+        </li>
 
-  <body background="../resources/tech.jpg">
-    <header class="header">
+        <li>
+            <div class="dropdown">
+                <a href="#" class="drop-btn">Quiz</a>
+                <div class="dropdown-content">
+                    <a href="createQuiz.html">Create a Quiz</a>
+                    <a href="seeQuizzes.html">See all Quizzes</a>
+                </div>
+            </div>
+        </li>
 
-      <a href="#" class="header-icon" id="header-icon"></a>
-      <a href="#" class="header-logo">Logo</a>
+        <li>
+            <a href="questions.html">
+                <span>Questions</span>
+            </a>
+        </li>
 
-      <nav class="menu">
-        <a href="#">
-          <span>Home</span>
-        </a>
+        <li>
+            <a href="users.html">
+                <span>Users</span>
+            </a>
+        </li>
 
-        <div class="dropdown">
-          <span class="drop-btn">Acount</span>
+        <li>
+            <a href="technology.html">
+                <span>Technologies</span>
+            </a>
+        </li>
 
-          <div class="dropdown-content">
-            <a href="">Profile</a>
-            <a href="">Logout</a>
-          </div>
-        </div>
+        <li>
+            <a href="difficultyLevel.html" id="difficultyLevelLink">
+              <span>Dificulty Level</span>
+            </a>
+        </li>
 
-        <div class="dropdown">
-          <span class="drop-btn">Quiz</span>
+        <li>
+            <div class="dropdown">
+                <a id="account-button" href="#" class="drop-btn"></a>
+                <div class="dropdown-content">
+                    <a href="login.html" onclick="window.localStorage.removeItem('token')">Logout</a>
+                </div>
+            </div>
+        </li>
+    </ul>
 
-          <div class="dropdown-content">
-            <a href="#">Take a Quiz</a>
-            <a href="#">Create a Quiz</a>
-            <a href="#">See all Quizzes</a>
-          </div>
-        </div>
-
-        <a href="#">
-          <span>Questions</span>
-        </a>
-
-        <a href="users.html">
-          <span>Users</span>
-        </a>
-
-        <a href="technology.html">
-          <span>Technologies</span>
-        </a>
-
-        <a href="difficultyLevel.html" id="difficultyLevelLink">
-          <span>Dificulty Level
-            <span>
-        </a>
-      </nav>
-
-    </header>
-    <div style="padding-top: 70px">
-      <div class="control">
+</header>
+<div style="padding-top: 70px">
+    <div class="control">
         <h2>Technologies</h2>
         <div class="form">
-          <fieldset>
-            <legend>Add a new technology</legend>
-            <label for="technologies"> Name: </label>
-            <input id="technologies" type="text" name="name">
-            <button id="submit">Submit</button>
-          </fieldset>
+            <fieldset>
+                <legend>Add a new technology</legend>
+                <label for="technologies"> Name: </label>
+                <input id="technologies" type="text" name="name">
+                <button id="submit">Submit</button>
+            </fieldset>
         </div>
-      </div>
-
-      <div class="list">
-        <input id="searchInput" type="text" name="search" placeholder="Search.." class="search">
-        <h2>Technologies List</h2>
-        <article id="technologyList">
-          <h3 class="technology-name">Name</h3>
-
-        </article>
-      </div>
     </div>
 
+    <div class="list" id="technologyList">
+        <h2>Technologies List</h2>
+        <div id="myModal" class="modal" style="visibility:hidden">
+            <div class="modal-content">
+                <span class="close"
+                      onclick="document.getElementById('myModal').style.visibility = 'hidden'">&times;</span>
+                <h1>Update a technology </h1>
+                <div class="form">
+                    <fieldset>
+                        <label for="nameUpdate"> Name: </label>
+                        <input id="nameUpdate" type="text" name="name">
+                        <button id="submitUpdateTeh"
+                                onclick="updateTechnologyRequest(update_id);hideUpdateModal();">
+                            Update
+                        </button>
+                        <button id="cancelUpdateTeh"
+                                onclick="document.getElementById('myModal').style.visibility = 'hidden'">Cancel
+                        </button>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <script src="../scripts/technologies.js"></script>
-    <script type="text/javascript" src="../scripts/index.js"></script>
-  </body>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../scripts/index.js"></script>
+<script src="../scripts/technology.js"></script>
+
+</body>
 
 </html>

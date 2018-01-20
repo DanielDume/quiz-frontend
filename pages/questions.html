@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title> Questions </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" type="text/css" href="../styles/index.css">
+</head>
+<body background="../resources/difLevel.jpg">
+<header>
+    <ul class="nav">
+        <li>
+            <a href="index.html">
+                <span>Home</span>
+            </a>
+        </li>
+
+        <li>
+            <div class="dropdown">
+                <a href="#" class="drop-btn">Quiz</a>
+                <div class="dropdown-content">
+                    <a href="createQuiz.html">Create a Quiz</a>
+                    <a href="seeQuizzes.html">See all Quizzes</a>
+                </div>
+            </div>
+        </li>
+
+        <li>
+            <a href="questions.html">
+                <span>Questions</span>
+            </a>
+        </li>
+
+
+        <li>
+            <a href="users.html">
+                <span>Users</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="technology.html">
+                <span>Technologies</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="difficultyLevel.html" id="difficultyLevelLink">
+                <span>Dificulty Level</span>
+            </a>
+        </li>
+
+        <li>
+            <div class="dropdown">
+                <a id="account-button" href="#" class="drop-btn"></a>
+                <div class="dropdown-content">
+                    <a href="login.html" onclick="window.localStorage.removeItem('token')">Logout</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+</header>
+
+<div style="padding-top: 70px">
+    <div class="control">
+        <div style="width: 300px">
+            <fieldset>
+                <legend style="font-weight: bold">Add a new question</legend>
+                <div id="quizInput">
+                    <label for="question">Question:</label>
+                    <input type="text" id="question">
+                    <br/><br/>
+
+                    <label for="answer1">A</label>
+                    <input type="text" id="answer1">
+                    <input type="checkbox" id="checkbox1" value="Correct?" title="checkbox1"><br/>
+                    <br/><br/>
+
+                    <label for="answer2">B</label>
+                    <input type="text" id="answer2">
+                    <input type="checkbox" id="checkbox2" value="Correct?" title="checkbox1"><br/>
+                    <br/><br/>
+
+                    <label for="answer3">C</label>
+                    <input type="text" id="answer3">
+                    <input type="checkbox" id="checkbox3" value="Correct?" title="checkbox1"><br/>
+                    <br/><br/>
+
+                    <label for="answer4">D</label>
+                    <input type="text" id="answer4">
+                    <input type="checkbox" id="checkbox4" value="Correct?" title="checkbox1"><br/>
+                    <br/><br/>
+
+                    <label for="timeToAnswer">Time to answer</label>
+                    <input type="text" id="timeToAnswer">
+                    <br/><br/>
+
+                    <label for="technology">Tech</label>
+                    <select id="technology">
+                    </select>
+                    <br/><br/>
+
+                    <label for="difficulty">Diff</label>
+                    <select id="difficulty">
+                    </select>
+                    <br/><br/>
+
+                    <button id="submit">Submit</button>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="list" id="list">
+        <h2>Questions List</h2>
+        <label for="filterTechnology">Filter by technology</label>
+        <input type="checkbox" title="filterTechnology" id="filterTechnology"/>
+        <label for="filterDifficulty">Filter by difficulty</label>
+        <input type="checkbox" title="filterDifficulty" id="filterDifficulty"/>
+        <div id="myModal" class="modal" style="visibility:hidden">
+            <div class="modal-content">
+            <span class="close"
+                  onclick="document.getElementById('myModal').style.visibility = 'hidden'">&times;</span>
+                <h1>Update a question </h1>
+                <div>
+                    <fieldset>
+                        <label for="requirementsUpdate"> Requirements: </label>
+                        <input id="requirementsUpdate" type="text" name="name">
+                        <br/><br/>
+
+                        <label for="answer1Update">A: </label>
+                        <input id="answer1Update" type="text" name="answer">
+                        <input type="checkbox" id="checkbox1Update" value="Correct?" title="checkbox1">
+                        <br/><br/>
+
+                        <label for="answer2Update">B: </label>
+                        <input id="answer2Update" type="text" name="answer">
+                        <input type="checkbox" id="checkbox2Update" value="Correct?" title="checkbox2">
+                        <br/><br/>
+
+                        <label for="answer3Update">C: </label>
+                        <input id="answer3Update" type="text" name="answer">
+                        <input type="checkbox" id="checkbox3Update" value="Correct?" title="checkbox3">
+                        <br/><br/>
+
+                        <label for="answer4Update">D: </label>
+                        <input id="answer4Update" type="text" name="answer">
+                        <input type="checkbox" id="checkbox4Update" value="Correct?" title="checkbox4">
+                        <br/><br/>
+
+                        <label for="timeToAnswerUpdate">Time to answer</label>
+                        <input type="text" id="timeToAnswerUpdate">
+                        <br/><br/>
+
+                        <label for="technologyUpdate">Tech</label>
+                        <select id="technologyUpdate">
+                        </select>
+                        <br/><br/>
+
+
+                        <label for="difficultyUpdate">Diff</label>
+                        <select id="difficultyUpdate">
+                        </select>
+                        <br/><br/>
+
+
+                        <button id="submitUpdateQuestion"
+                                onclick="updateQuestionRequest(update_id);hideUpdateModal();">
+                            Update
+                        </button>
+                        <button id="cancelUpdateTeh"
+                                onclick="hideUpdateModal()">Cancel
+                        </button>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../scripts/index.js"></script>
+<script type="text/javascript" src="../scripts/questions.js"></script>
+
+</html>
