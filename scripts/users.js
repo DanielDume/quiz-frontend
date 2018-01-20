@@ -1,5 +1,6 @@
 var server_url = "https://quiz-shm.herokuapp.com";
 var current_user;
+var update_id;
 
 try_authenticate();
 
@@ -11,8 +12,7 @@ function showUpdateModal(id) {
     document.getElementById("roleUpdate").value = current_user.role;
     var modal = document.getElementById("myModal");
     modal.style.visibility = "visible";
-    document.getElementById("aidi").innerHTML = id;
-
+    update_id = id;
 }
 
 function hideUpdateModal() {
@@ -91,11 +91,14 @@ function searchUser() {
                     item._id + '</p>' + '<h3 class="user-name">' +
                     item.firstName + ' ' + item.lastName +
                     '</h3><h4 class="user-role">' +
-                    item.username + '</h4>' + '<h4 class="user-role">' +
-                    item.role + "</h4><button id=deleteButton> Delete " +
-                    '</button><button id=updateButton onclick="showUpdateModal(\''+item._id+'\')"> ' +
-                    "Update </button></article >";
+                    item.username + '</h4>' + '<h4 class="user-role">' + item.role;
+                if(!(window.localStorage.getItem("user_role") === "HR") || !(item.role === "ADMIN") ) {
+                     row += "</h4><button id=deleteButton> Delete " +
+                        '</button><button id=updateButton onclick="showUpdateModal(\'' + item._id + '\')"> ' +
+                        "Update </button></article >";
+                }
                 $("#list").append(row);
+
             });
         },
         error: function () {
@@ -131,6 +134,16 @@ $(document).ready(function () {
         option1.value = "hr";
         option2.innerHTML = "Admin";
         option2.value = "admin";
+        select.appendChild(option1);
+        select.appendChild(option2);
+
+        select = document.getElementById("roleUpdate");
+        option1 = document.createElement("option");
+        option2 = document.createElement("option");
+        option1.innerHTML = "HR";
+        option1.value = "HR";
+        option2.innerHTML = "Admin";
+        option2.value = "ADMIN";
         select.appendChild(option1);
         select.appendChild(option2);
     }

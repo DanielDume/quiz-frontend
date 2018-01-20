@@ -19,7 +19,7 @@ function authenticate() {
         method: "POST",
         data: {"username": username, "password": password},
         success: function (data) {
-            var role = "HR";
+            var role = "ADMIN";
             window.localStorage.setItem("token", data['token']);
             window.localStorage.setItem("user_role", role);
             window.localStorage.setItem("user_email", "flo@kuende.com");

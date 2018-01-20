@@ -92,8 +92,8 @@
                 <br/>
                 <label for="roleAdd"> Role: </label>
                 <select id="roleAdd" type="text">
-                    <option value="examinee">Examinee</option>
-                    <option value="technical_recruiter">Technical Recruiter</option>
+                    <option value="EXAMINEE">Examinee</option>
+                    <option value="TECHNICAL_RECRUITER">Technical Recruiter</option>
                 </select>
                 <button id="submit">Submit</button>
             </fieldset>
@@ -110,7 +110,6 @@
                 <h1>Update a user </h1>
                 <div class="form">
                     <fieldset>
-                        <div style="visibility:hidden" id="aidi"></div>
                         <label for="firstNameUpdate"> First name: </label>
                         <input id="firstNameUpdate" type="text">
                         <br/>
@@ -129,11 +128,11 @@
                         <br/>
                         <label for="roleUpdate"> Role: </label>
                         <select id="roleUpdate" type="text">
-                            <option value="examinee">Examinee</option>
-                            <option value="technical_recruiter">Technical Recruiter</option>
+                            <option value="EXAMINEE">Examinee</option>
+                            <option value="TECHNICAL_RECRUITER">Technical Recruiter</option>
                         </select>
                         <button id="submitUpdateUsers"
-                                onclick="updateUserRequest(document.getElementById('aidi').innerHTML);hideUpdateModal();">
+                                onclick="updateUserRequest(update_id);hideUpdateModal();">
                             Update
                         </button>
                         <button id="cancelUpdateUsers"
