@@ -1,5 +1,3 @@
-var server_url = "https://quiz-shm.herokuapp.com";
-
 function populateSelectTechnologies() {
     var select = document.getElementById("technologySelect");
     $.ajax({

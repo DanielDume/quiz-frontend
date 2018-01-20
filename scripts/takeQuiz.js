@@ -1,27 +1,32 @@
-var server_url = "https://quiz-shm.herokuapp.com";
 var questions_list = [];
-var counter = 0;
 var current_quiz_id = window.localStorage.getItem("current_quiz_id");
+var disponible_time;
+var seconds_left;
+var over = false;
 
-var seconds_left = 10;
-var interval = setInterval(function() {
-    document.getElementById('timer_div').innerHTML = --seconds_left;
-
-    if (seconds_left <= 0)
-    {
-        document.getElementById('timer_div').innerHTML = 'You are ready';
-        clearInterval(interval);
+setInterval(function () {
+    document.getElementById('timer_div').innerHTML = "TIME LEFT: " + (--seconds_left).toString();
+    if (seconds_left <= 0 && !over) {
+        over = true;
+        alert("Time is over!");
+        submitAnswers();
     }
 }, 1000);
 
 function getQuestions() {
     var list = $("#list");
     $.ajax({
+        async: false,
         url: server_url + "/api/quiz/take/" + current_quiz_id,
         headers: {'x-access-token': window.localStorage.getItem("token")},
         contentType: "application/json",
         method: "GET",
         success: function (data) {
+            disponible_time = data.timeToAnswer;
+            const currentDate = new Date();
+            const startTimestamp = new Date(data.startTimestamp);
+            const timeDifference = Math.round(Math.abs((currentDate.getTime() - startTimestamp.getTime()) / 1000));
+            seconds_left = disponible_time - timeDifference;
             $.each(data.questions, function (index, item) {
                 var counter2 = 0;
                 var row = '<article id="question' + item._id + '">' + '<p style="display: none">' +
@@ -34,13 +39,19 @@ function getQuestions() {
                 }
                 questions_list.push(item);
                 list.append(row);
-                counter++;
             });
             list.append("<button id=\"submit\" onclick=\"submitAnswers()\">Submit</button>\n");
-            list.append("<div id='timer_div'></div>")
         },
         error: function (data) {
-            alert(JSON.stringify(data));
+            if (data.hasOwnProperty("responseText")) {
+                if (JSON.parse(data.responseText).message.search("time") !== -1) {
+                    alert("Time is over!");
+                    submitAnswers();
+                }
+            }
+            else {
+                alert(JSON.stringify(data));
+            }
         }
     })
 }

@@ -1,4 +1,3 @@
-var server_url = "https://quiz-shm.herokuapp.com";
 var current_technology;
 
 $('#submit').on('click', function () {
@@ -36,11 +35,12 @@ function updateTechnologyRequest(id){
 }
 
 function getAllTechnologies() {
+    $("article", "#technologyList").remove();
     $.ajax({
         url: server_url + '/api/technologies',
         headers: {'x-access-token': window.localStorage.getItem("token")},
         success: function (data) {
-            $('#technologyList').empty();
+            console.log(data);
             populateTechnologyList(data);
         },
         error: function () {
@@ -88,7 +88,6 @@ function addTechnology() {
         data: {"name": name},
         success: function (data) {
             console.log(data.message);
-            $('#technologyList').empty();
             getAllTechnologies();
 
         },
