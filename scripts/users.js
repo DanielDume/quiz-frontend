@@ -1,4 +1,3 @@
-var server_url = "https://quiz-shm.herokuapp.com";
 var current_user;
 var update_id;
 
