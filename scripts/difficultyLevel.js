@@ -61,8 +61,8 @@ function searchDifficultyLevel() {
                 if (name === '' || item.name.startsWith(name)) {
                     row = '<article><h3 class="difLevel-name">' + item.name +
                         '</h3><p style="display: none">' + item._id + "</p>" +
-                        "<button id=deleteButton> Delete </button>" +
-                        '<button id=updateButton onclick="showUpdateModal(\'' + item._id + '\')"> Update </button></article>';
+                        "<button id=deleteButton class='roundEdges'> Delete </button>" +
+                        '<button id=updateButton class="roundEdges" onclick="showUpdateModal(\'' + item._id + '\')"> Update </button></article>';
                     $("#list").append(row);
                 }
             });
