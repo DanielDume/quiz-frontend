@@ -21,18 +21,8 @@
 
             <li>
                 <div class="dropdown">
-                    <a href="#" class="drop-btn">Account</a>
-                    <div class="dropdown-content">
-                        <a href="login.html" onclick="window.localStorage.removeItem('token')">Logout</a>
-                    </div>
-                </div>
-            </li>
-
-            <li>
-                <div class="dropdown">
                     <a href="#" class="drop-btn">Quiz</a>
                     <div class="dropdown-content">
-                        <a href="takeQuiz.html">Take a Quiz</a>
                         <a href="createQuiz.html">Create a Quiz</a>
                         <a href="seeQuizzes.html">See all Quizzes</a>
                     </div>
@@ -63,6 +53,15 @@
                     <span>Dificulty Level</span>
                 </a>
             </li>
+
+            <li>
+                <div class="dropdown">
+                    <a id="account-button" href="#" class="drop-btn"></a>
+                    <div class="dropdown-content">
+                        <a href="login.html" onclick="window.localStorage.removeItem('token')">Logout</a>
+                    </div>
+                </div>
+            </li>
         </ul>
 
     </header>
@@ -70,42 +69,45 @@
     <div style="padding-top: 70px">
 
         <div class="list createQuiz" id="list">
-            <input type="text" name="search" placeholder="Search.." class="search" id="searchBtn">
 
-            <fieldset>
-                <div id="quizInput">
+            <!-- <fieldset> -->
+            <div id="quizInput">
+                <br/>                
+                <label for="userSelect">Assigned user : </label>
+                <select id="userSelect">
+                </select>
+                <br/>
+                <br/>
 
-                    <label for="userSelect">User :</label>
-                    <select id="userSelect">
-                    </select>
-                    <br/>
+                <label for="technologySelect">Technology : </label>
+                <select id="technologySelect">
+                </select>
+                <br/>
+                <br/>
 
-                    <label for="technologySelect">Tech</label>
-                    <select id="technologySelect">
-                    </select>
-                    <br/>
+                <label for="difficultySelect">Difficulty level : </label>
+                <select id="difficultySelect">
+                </select>
+                <br/>
+                <br/>
 
-                    <label for="difficultySelect">Diff</label>
-                    <select id="difficultySelect">
-                    </select>
-                    <br/>
+                <label for="timeSelect">Time to complete : </label>
+                <select id="timeSelect">
+                    <option value="900">
+                        15 minutes
+                    </option>
+                    <option value="1800">
+                        30 minutes
+                    </option>
+                    <option value="2700">
+                        45 minutes
+                    </option>
+                </select>
+                <br/>
+                <br/>
 
-                    <label for="timeSelect">Diff</label>
-                    <select id="timeSelect">
-                        <option value="900">
-                            15 minutes
-                        </option>
-                        <option value="1800">
-                            30 minutes
-                        </option>
-                        <option value="2700">
-                            45 minutes
-                        </option>
-                    </select>
-                    <br/>
-
-                </div>
-            </fieldset>
+            </div>
+            <!-- </fieldset> -->
 
             <div class="form">
                 <button id="submit" value="Submit">

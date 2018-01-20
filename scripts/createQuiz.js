@@ -2,7 +2,6 @@ var server_url = "https://quiz-shm.herokuapp.com";
 
 function populateSelectTechnologies() {
     var select = document.getElementById("technologySelect");
-    //var selectUpdate = document.getElementById("technologyUpdate");
     $.ajax({
         url: server_url + '/api/technologies',
         headers: { 'x-access-token': window.localStorage.getItem("token") },
@@ -49,7 +48,7 @@ function populateSelectUser() {
                 console.log(data[i]['role'].toLowerCase());
                 if (data[i]['role'].toLowerCase() == "examinee") {
                     var option1 = document.createElement("option");
-                    option1.innerHTML = data[i]['username'];
+                    option1.innerHTML = data[i]['firstName'] + ' ' + data[i]['lastName'];
                     option1.value = data[i]['_id'];
                     select.appendChild(option1);
                 }
@@ -72,7 +71,7 @@ $(document).ready(function () {
         var diffLevel = $("#difficultySelect").val();
         var tech = $("#technologySelect").val();
         $.ajax({
-            url: server_url + '/api/create-quiz/',
+            url: server_url + '/api/quiz/create',
             method: "POST",
             headers: {'x-access-token': window.localStorage.getItem("token")},
             contentType: "application/x-www-form-urlencoded",
@@ -83,7 +82,7 @@ $(document).ready(function () {
                 timeToAnswer: time
              },
             success: function () {
-                
+              alert("Succesfully added");
             },
             error: function (data) {
                 alert("Failed to create quiz, " + data.responseJSON.message);
