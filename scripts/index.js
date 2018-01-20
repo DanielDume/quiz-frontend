@@ -1,3 +1,5 @@
+document.getElementById('account-button').innerHTML = window.localStorage.user_firstName;
+
 var server_url = "http://quiz-shm.herokuapp.com";
 
 $(document).ready(function () {

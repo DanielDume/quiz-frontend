@@ -1,8 +1,8 @@
+document.getElementById('account-button').innerHTML = window.localStorage.user_firstName;
+
 var server_url = "https://quiz-shm.herokuapp.com";
 var current_user;
 var update_id;
-
-try_authenticate();
 
 function showUpdateModal(id) {
     getUser(id);
@@ -54,18 +54,22 @@ function addUser() {
 }
 
 function updateUserRequest(id) {
+    var password = $("#passwordUpdate").val();
+    var json = {
+        "firstName": $("#firstNameUpdate").val(),
+        "lastName": $("#lastNameUpdate").val(),
+        "email": $("#emailUpdate").val(),
+        "role": $("#roleUpdate").val()
+    };
+    if (password !== "") {
+        json["password"] = password;
+    }
     $.ajax({
         url: server_url + '/api/users/' + id,
         method: "PUT",
         headers: {'x-access-token': window.localStorage.getItem("token")},
         contentType: "application/x-www-form-urlencoded",
-        data: {
-            firstName: $("#firstNameUpdate").val(),
-            lastName: $("#lastNameUpdate").val(),
-            email: $("#emailUpdate").val(),
-            password: $("#passwordUpdate").val(),
-            role: $("#roleUpdate").val()
-        },
+        data: json,
         success: function () {
             searchUser();
         },

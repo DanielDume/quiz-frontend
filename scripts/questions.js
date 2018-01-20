@@ -1,3 +1,5 @@
+document.getElementById('account-button').innerHTML = window.localStorage.user_firstName;
+
 var server_url = "https://quiz-shm.herokuapp.com";
 var current_question;
 

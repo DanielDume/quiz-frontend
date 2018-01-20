@@ -46,6 +46,7 @@ function get_data_for_user(){
             }
             window.localStorage.setItem("user_email", data.email);
             window.localStorage.setItem("user_id", data.id);
+            window.localStorage.setItem("user_firstName", data.firstName);
             console.log("Login success");
         },
         error: function (data) {
