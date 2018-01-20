@@ -1,6 +1,9 @@
 var server_url = "https://quiz-shm.herokuapp.com";
+var current_difficulty;
 
 function showUpdateModal(id) {
+    getDifficulty(id);
+    document.getElementById("nameUpdate").value = current_difficulty.name;
     document.getElementById("myModal").style.visibility = "visible";
     document.getElementById("aidi").innerHTML = id;
 }
@@ -62,6 +65,21 @@ function searchDifficultyLevel() {
                     $("#list").append(row);
                 }
             });
+        },
+        error: function () {
+            console.log("error");
+        }
+    });
+}
+
+function getDifficulty(id){
+    $.ajax({
+        async:false,
+        url: server_url + '/api/difficulties/' + id,
+        headers: {'x-access-token': window.localStorage.getItem("token")},
+        data: {},
+        success: function (data) {
+            current_difficulty = data;
         },
         error: function () {
             console.log("error");

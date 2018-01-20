@@ -1,4 +1,4 @@
-var server_url = 'https://quiz-shm.herokuapp.com';
+var server_url = "https://quiz-shm.herokuapp.com";
 
 $("#loginBtn").on("click", function () {
     authenticate();
@@ -23,8 +23,9 @@ function authenticate() {
             console.log("Login success");
             go_to_html_main_menu();
         },
-        error: function () {
+        error: function (data) {
             console.log('Error');
+            alert(JSON.stringify(data));
         }
     })
 }

@@ -1,8 +1,14 @@
 var server_url = "https://quiz-shm.herokuapp.com";
+var current_user;
 
 try_authenticate();
 
 function showUpdateModal(id) {
+    getUser(id);
+    document.getElementById("firstNameUpdate").value = current_user.firstName;
+    document.getElementById("lastNameUpdate").value = current_user.lastName;
+    document.getElementById("emailUpdate").value = current_user.email;
+    document.getElementById("roleUpdate").value = current_user.role;
     var modal = document.getElementById("myModal");
     modal.style.visibility = "visible";
     document.getElementById("aidi").innerHTML = id;
@@ -94,6 +100,24 @@ function searchUser() {
         },
         error: function () {
             console.log("error");
+        }
+    });
+}
+
+function getUser(id){
+    $.ajax({
+        async: false,
+        url: server_url + '/api/users/' + id,
+        headers: {'x-access-token': window.localStorage.getItem("token")},
+        contentType: "application/x-www-form-urlencoded",
+        data: {},
+        success: function (data) {
+            current_user = data;
+        },
+        error: function (data) {
+            console.log("error");
+            alert(JSON.stringify(data));
+            return null;
         }
     });
 }

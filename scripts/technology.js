@@ -1,4 +1,5 @@
 var server_url = "https://quiz-shm.herokuapp.com";
+var current_technology;
 
 $('#submit').on('click', function () {
     addTechnology();
@@ -9,6 +10,8 @@ $(document).ready(function () {
 });
 
 function showUpdateModal(id) {
+    getTechnology(id);
+    document.getElementById("nameUpdate").value = current_technology.name;
     document.getElementById("myModal").style.visibility = "visible";
     document.getElementById("aidi").innerHTML = id;
 }
@@ -42,6 +45,21 @@ function getAllTechnologies() {
         },
         error: function () {
             console.log("error");
+        }
+    });
+}
+
+function getTechnology(id){
+    $.ajax({
+        async:false,
+        url: server_url + '/api/technologies/' + id,
+        headers: {'x-access-token': window.localStorage.getItem("token")},
+        success: function (data) {
+            current_technology = data;
+        },
+        error: function (data) {
+            console.log("error");
+            alert(JSON.stringify(data));
         }
     });
 }

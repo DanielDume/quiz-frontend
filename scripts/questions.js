@@ -1,6 +1,24 @@
 var server_url = "https://quiz-shm.herokuapp.com";
+var current_question;
 
 function showUpdateModal(id) {
+    console.log(current_question);
+    getQuestion(id);
+    document.getElementById("requirementsUpdate").value = current_question.requirements;
+    var counter = 1;
+    for(var i in current_question.rightAnswers){
+        document.getElementById("answer" + counter.toString() + "Update").value = current_question.rightAnswers[i];
+        document.getElementById("checkbox" + counter.toString() + "Update").checked = true;
+        counter++;
+    }
+    for(var i in current_question.wrongAnswers){
+        document.getElementById("answer" + counter.toString() + "Update").value = current_question.wrongAnswers[i];
+        counter++;
+    }
+    document.getElementById("timeToAnswerUpdate").value = current_question.timeToAnswer;
+    document.getElementById("technologyUpdate").value = current_question.technology._id;
+    document.getElementById("difficultyUpdate").value = current_question.difficultyLevel._id;
+
     document.getElementById("myModal").style.visibility = "visible";
     document.getElementById("aidi").innerHTML = id;
 }
@@ -26,33 +44,33 @@ function compare2(a,b) {
 }
 
 function addQuestion() {
-    var question = $("#question").val(), answera = $("#answera").val(), answerb = $("#answerb").val(),
-        answerc = $("#answerc").val(), answerd = $("#answerd").val();
+    var question = $("#question").val(), answer1 = $("#answer1").val(), answer2 = $("#answer2").val(),
+        answer3 = $("#answer3").val(), answer4 = $("#answer4").val();
     var rightAnswers = [];
     var wrongAnswers = [];
     if (document.getElementById('checkbox1').checked) {
-        rightAnswers.push(answera);
+        rightAnswers.push(answer1);
     }
     else {
-        wrongAnswers.push(answera);
+        wrongAnswers.push(answer1);
     }
     if (document.getElementById('checkbox2').checked) {
-        rightAnswers.push(answerb);
+        rightAnswers.push(answer2);
     }
     else {
-        wrongAnswers.push(answerb);
+        wrongAnswers.push(answer2);
     }
     if (document.getElementById('checkbox3').checked) {
-        rightAnswers.push(answerc);
+        rightAnswers.push(answer3);
     }
     else {
-        wrongAnswers.push(answerc);
+        wrongAnswers.push(answer3);
     }
     if (document.getElementById('checkbox4').checked) {
-        rightAnswers.push(answerd);
+        rightAnswers.push(answer4);
     }
     else {
-        wrongAnswers.push(answerd);
+        wrongAnswers.push(answer4);
     }
     var technologySelect = document.getElementById("technology");
     var technologyId = technologySelect.options[technologySelect.selectedIndex].value;
@@ -62,25 +80,22 @@ function addQuestion() {
 
     var timeToAnswer = $("#timeToAnswer").val();
 
-    alert(JSON.stringify({technologyId: technologyId,
-        difficultyLevelId: difficultyId,
-        requirements: question,
-        rightAnswers: rightAnswers,
-        wrongAnswers: wrongAnswers,
-        timeToAnswer: timeToAnswer}));
     $.ajax({
         url: server_url + '/api/questions',
         method: "POST",
-        headers: {'x-access-token': window.localStorage.getItem("token")},
-        contentType: "application/x-www-form-urlencoded",
-        data: {
+        crossDomain: true,
+        headers: {
+            'x-access-token': window.localStorage.getItem("token")
+        },
+        contentType: "application/json",
+        data: JSON.stringify({
             technologyId: technologyId,
             difficultyLevelId: difficultyId,
             requirements: question,
             rightAnswers: rightAnswers,
             wrongAnswers: wrongAnswers,
             timeToAnswer: timeToAnswer
-        },
+        }),
         success: function (data) {
             console.log(data);
             getQuestions();
@@ -94,36 +109,36 @@ function addQuestion() {
 
 function updateQuestionRequest(id) {
     var requirements = $("#requirementsUpdate").val();
-    var answera = $("#answeraUpdate").val();
-    var answerb = $("#answerbUpdate").val();
-    var answerc = $("#answercUpdate").val();
-    var answerd = $("#answerdUpdate").val();
+    var answer1 = $("#answer1Update").val();
+    var answer2 = $("#answer2Update").val();
+    var answer3 = $("#answer3Update").val();
+    var answer4 = $("#answer4Update").val();
     var timeToAnswer = $("#timeToAnswerUpdate").val();
     var rightAnswers = Array();
     var wrongAnswers = Array();
     if (document.getElementById('checkbox1Update').checked) {
-        rightAnswers.push(answera);
+        rightAnswers.push(answer1);
     }
     else {
-        wrongAnswers.push(answera);
+        wrongAnswers.push(answer1);
     }
     if (document.getElementById('checkbox2Update').checked) {
-        rightAnswers.push(answerb);
+        rightAnswers.push(answer2);
     }
     else {
-        wrongAnswers.push(answerb);
+        wrongAnswers.push(answer2);
     }
     if (document.getElementById('checkbox3Update').checked) {
-        rightAnswers.push(answerc);
+        rightAnswers.push(answer3);
     }
     else {
-        wrongAnswers.push(answerc);
+        wrongAnswers.push(answer3);
     }
     if (document.getElementById('checkbox4Update').checked) {
-        rightAnswers.push(answerd);
+        rightAnswers.push(answer4);
     }
     else {
-        wrongAnswers.push(answerd);
+        wrongAnswers.push(answer4);
     }
     var technologySelect = document.getElementById("technologyUpdate");
     var technologyId = technologySelect.options[technologySelect.selectedIndex].value;
@@ -160,7 +175,7 @@ function getQuestions() {
     $.ajax({
         url: server_url + '/api/questions',
         headers: {'x-access-token': window.localStorage.getItem("token")},
-        contentType: "application/x-www-form-urlencoded",
+        contentType: "application/json",
         data: {},
         success: function (data) {
             console.log(data);
@@ -172,6 +187,7 @@ function getQuestions() {
             }
             var row = "";
             $.each(data, function (index, item) {
+                // alert(JSON.stringify(item));
                 row = '<article>' + '<p style="display: none">' +
                     item._id + '</p>' + '<h3 class="question-name">' +
                     item.requirements +
@@ -182,6 +198,22 @@ function getQuestions() {
                     "Update </button></article >";
                 $("#list").append(row);
             });
+        },
+        error: function () {
+            console.log("error");
+        }
+    });
+}
+
+function getQuestion(id){
+    $.ajax({
+        url: server_url + '/api/questions/' + id,
+        headers: {'x-access-token': window.localStorage.getItem("token")},
+        contentType: "application/json",
+        async: false,
+        data: {},
+        success: function (data) {
+            current_question = data;
         },
         error: function () {
             console.log("error");
