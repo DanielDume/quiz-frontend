@@ -6,7 +6,7 @@ function getQuizzes() {
         success: function (data) {
             if(data.hasOwnProperty("message")){
                 if(data.message === "You do not have any quizzes assigned."){
-                    console.log("Nu e nimic aici!");
+                    document.getElementById("list").innerHTML = "<h1>There are no quizzes assigned to you!</h1>";
                 }
             }
             else{
@@ -20,16 +20,17 @@ function getQuizzes() {
                             status = "Started!";
                         }
                         else{
-                            status = "Not completed yet!"
+                            status = "Not started yet!"
                         }
                     }
                     var row = '<article>' + '<p style="display: none">' +
                         item._id + '</p>' + '<h3 class="user-name">Time: ' +
-                        item.timeToAnswer/60 + ' minutes</h3><h4 class="user-role">' + status + '</h4>';
+                        Math.round(item.timeToAnswer/60) + ' minutes ' + item.timeToAnswer%60 + ' seconds</h3><h4 class="user-role">' + status + '</h4>';
 
                     if (!item.completed) {
-                        if(item.hasOwnProperty("startTimestamp"))
+                        if(item.hasOwnProperty("startTimestamp")) {
                             row += "<button id='takeQuizButton' onclick='goToTakeQuiz(\"" + item._id + "\")'> Take Quiz </button>";
+                        }
                         else
                             row += "<button id='takeQuizButton' onclick='startQuiz(\"" + item._id + "\")'> Take Quiz </button>";
                     }
@@ -59,7 +60,7 @@ function startQuiz(id){
         headers: {'x-access-token': window.localStorage.getItem("token")},
         contentType: "application/json",
         method: "POST",
-        success: function(){
+        success: function(data){
             goToTakeQuiz(id);
         },
         error: function(data){
