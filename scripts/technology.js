@@ -1,4 +1,3 @@
-var server_url = "https://quiz-shm.herokuapp.com";
 var current_technology;
 
 $('#submit').on('click', function () {
