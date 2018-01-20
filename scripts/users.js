@@ -46,8 +46,10 @@ function addUser() {
             else
                 if(JSON.stringify(data['responseJSON']['message']).search('duplicate') !== -1)
                     alert("This user already exists! Please choose other username!");
-                else
+                else {
                     alert(JSON.stringify(data));
+                    alert("Please enable CORS plugin!");
+                }
         }
     });
 }
@@ -68,8 +70,10 @@ function updateUserRequest(id) {
         error: function (data) {
             if(JSON.stringify(data['responseText']).search('Role') !== -1)
                 alert(JSON.stringify(data['responseText']));
-            else
+            else {
                 alert(JSON.stringify(data));
+                alert("Please enable CORS plugin!");
+            }
         }
     })
 }
@@ -103,6 +107,7 @@ function searchUser() {
         },
         error: function () {
             console.log("error");
+            alert("Please enable CORS plugin!");
         }
     });
 }
