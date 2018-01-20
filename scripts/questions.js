@@ -1,5 +1,3 @@
-document.getElementById('account-button').innerHTML = window.localStorage.user_firstName;
-
 var server_url = "https://quiz-shm.herokuapp.com";
 var current_question;
 
@@ -178,7 +176,6 @@ function getQuestions() {
         url: server_url + '/api/questions',
         headers: {'x-access-token': window.localStorage.getItem("token")},
         contentType: "application/json",
-        data: {},
         success: function (data) {
             console.log(data);
             if(document.getElementById('filterDifficulty').checked) {
@@ -189,7 +186,6 @@ function getQuestions() {
             }
             var row = "";
             $.each(data, function (index, item) {
-                // alert(JSON.stringify(item));
                 row = '<article>' + '<p style="display: none">' +
                     item._id + '</p>' + '<h3 class="question-name">' +
                     item.requirements +
