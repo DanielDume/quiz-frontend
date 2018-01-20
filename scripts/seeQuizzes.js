@@ -4,7 +4,6 @@ function getQuizzes() {
         headers: {'x-access-token': window.localStorage.getItem("token")},
         contentType: "application/json",
         success: function (data) {
-            alert(JSON.stringify(data));
             if (data.hasOwnProperty("message")) {
                 if (data.message === "You do not have any quizzes assigned.") {
                     document.getElementById("list").innerHTML = "<h1>There are no quizzes assigned to you!</h1>";
