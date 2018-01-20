@@ -40,6 +40,7 @@ function getAllTechnologies() {
         url: server_url + '/api/technologies',
         headers: {'x-access-token': window.localStorage.getItem("token")},
         success: function (data) {
+            console.log(data);
             $('#technologyList').empty();
             populateTechnologyList(data);
         },
