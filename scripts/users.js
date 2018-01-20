@@ -41,15 +41,14 @@ function addUser() {
             console.log(data);
         },
         error: function (data) {
-            if(JSON.stringify(data['responseJSON']['errors']))
+            if (JSON.stringify(data['responseJSON']['errors']))
                 alert(JSON.stringify(data['responseJSON']['errors']));
-            else
-                if(JSON.stringify(data['responseJSON']['message']).search('duplicate') !== -1)
-                    alert("This user already exists! Please choose other username!");
-                else {
-                    alert(JSON.stringify(data));
-                    alert("Please enable CORS plugin!");
-                }
+            else if (JSON.stringify(data['responseJSON']['message']).search('duplicate') !== -1)
+                alert("This user already exists! Please choose other username!");
+            else {
+                alert(JSON.stringify(data));
+                alert("Please enable CORS plugin!");
+            }
         }
     });
 }
@@ -61,14 +60,17 @@ function updateUserRequest(id) {
         headers: {'x-access-token': window.localStorage.getItem("token")},
         contentType: "application/x-www-form-urlencoded",
         data: {
-            firstName: $("#firstNameUpdate").val(), lastName: $("#lastNameUpdate").val(), email: $("#emailUpdate").val(),
-            password: $("#passwordUpdate").val(), role: $("#roleUpdate").val()
+            firstName: $("#firstNameUpdate").val(),
+            lastName: $("#lastNameUpdate").val(),
+            email: $("#emailUpdate").val(),
+            password: $("#passwordUpdate").val(),
+            role: $("#roleUpdate").val()
         },
         success: function () {
             searchUser();
         },
         error: function (data) {
-            if(JSON.stringify(data['responseText']).search('Role') !== -1)
+            if (JSON.stringify(data['responseText']).search('Role') !== -1)
                 alert(JSON.stringify(data['responseText']));
             else {
                 alert(JSON.stringify(data));
@@ -96,8 +98,9 @@ function searchUser() {
                     item.firstName + ' ' + item.lastName +
                     '</h3><h4 class="user-role">' +
                     item.username + '</h4>' + '<h4 class="user-role">' + item.role;
-                if(!(window.localStorage.getItem("user_role") === "HR") || !(item.role === "ADMIN") ) {
-                     row += "</h4><button id=deleteButton> Delete " +
+                if ((!(window.localStorage.getItem("user_role") === "HR") || !(item.role === "ADMIN"))
+                    && (item.role !== "OWNER")) {
+                    row += "</h4><button id=deleteButton> Delete " +
                         '</button><button id=updateButton onclick="showUpdateModal(\'' + item._id + '\')"> ' +
                         "Update </button></article >";
                 }
@@ -112,7 +115,7 @@ function searchUser() {
     });
 }
 
-function getUser(id){
+function getUser(id) {
     $.ajax({
         async: false,
         url: server_url + '/api/users/' + id,
@@ -131,14 +134,14 @@ function getUser(id){
 }
 
 $(document).ready(function () {
-    if(window.localStorage.getItem("user_role") === "ADMIN"){
+    if (window.localStorage.getItem("user_role") === "ADMIN") {
         var select = document.getElementById("roleAdd");
         var option1 = document.createElement("option");
         var option2 = document.createElement("option");
         option1.innerHTML = "HR";
-        option1.value = "hr";
+        option1.value = "HR";
         option2.innerHTML = "Admin";
-        option2.value = "admin";
+        option2.value = "ADMIN";
         select.appendChild(option1);
         select.appendChild(option2);
 
