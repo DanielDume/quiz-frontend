@@ -35,12 +35,12 @@ function updateTechnologyRequest(id){
 }
 
 function getAllTechnologies() {
+    $("article", "#technologyList").remove();
     $.ajax({
         url: server_url + '/api/technologies',
         headers: {'x-access-token': window.localStorage.getItem("token")},
         success: function (data) {
             console.log(data);
-            $('#technologyList').empty();
             populateTechnologyList(data);
         },
         error: function () {
@@ -88,7 +88,6 @@ function addTechnology() {
         data: {"name": name},
         success: function (data) {
             console.log(data.message);
-            $('#technologyList').empty();
             getAllTechnologies();
 
         },
