@@ -66,51 +66,47 @@
 
     </header>
 
-    <div style="padding-top: 70px">
-
+    <div style="padding-top: 1px">
+        <h3 class="h3TitleCreateQuiz">Create a new quiz</h3>
         <div class="list createQuiz" id="list">
-
+           
             <!-- <fieldset> -->
-            <div id="quizInput">
-                <br/>                
-                <label for="userSelect">Assigned user : </label>
-                <select id="userSelect">
-                </select>
-                <br/>
-                <br/>
+            <div id="quizInput" class="quizInput">
+                <table id="tableCreateQuiz" class="beforeSpace">
+                    
+                    <tr>           
+                        <td><label for="userSelect">Assigned user  </label></td>
+                        <td><select id="userSelect" class="quizInputSelect"></select></td>
+                    </tr>
+                    <tr> 
+                            <td><label for="technologySelect">Technology </label></td>
+                            <td><select id="technologySelect" class="quizInputSelect"></select></td>
+                    </tr>
+                    <tr> 
+                            <td><label for="difficultySelect">Difficulty level  </label></td>
+                            <td> <select id="difficultySelect" class="quizInputSelect"></select></td>
+                    </tr>
+                    <tr> 
+                            <td><label for="timeSelect">Time to complete  </label></td>
+                            <td><select id="timeSelect" class="quizInputSelect">
+                            <option value="900">
+                                15 minutes
+                            </option>
+                            <option value="1800">
+                                30 minutes
+                            </option>
+                            <option value="2700">
+                                45 minutes
+                            </option>
+                        </select></td>
+                    </tr>
 
-                <label for="technologySelect">Technology : </label>
-                <select id="technologySelect">
-                </select>
-                <br/>
-                <br/>
-
-                <label for="difficultySelect">Difficulty level : </label>
-                <select id="difficultySelect">
-                </select>
-                <br/>
-                <br/>
-
-                <label for="timeSelect">Time to complete : </label>
-                <select id="timeSelect">
-                    <option value="900">
-                        15 minutes
-                    </option>
-                    <option value="1800">
-                        30 minutes
-                    </option>
-                    <option value="2700">
-                        45 minutes
-                    </option>
-                </select>
-                <br/>
-                <br/>
-
+            </table>
             </div>
             <!-- </fieldset> -->
 
             <div class="form">
-                <button id="submit" value="Submit">
+                <button id="submit" value="Submit" style="width: 16.1em">
                     Submit
                 </button>
             </div>
