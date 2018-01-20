@@ -67,10 +67,10 @@ $(document).ready(function () {
     populateSelectTechnologies();
     populateSelectUser();
     $("#submit").on('click', function(){
-        let userId = $("#userSelect").val();
-        let time = $("#timeSelect").val();
-        let diffLevel = $("#difficultySelect").val();
-        let tech = $("#technologySelect").val();
+        var userId = $("#userSelect").val();
+        var time = $("#timeSelect").val();
+        var diffLevel = $("#difficultySelect").val();
+        var tech = $("#technologySelect").val();
         $.ajax({
             url: server_url + '/api/create-quiz/',
             method: "POST",
