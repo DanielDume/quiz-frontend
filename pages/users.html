@@ -90,8 +90,11 @@
                 <input id="passwordAdd" type="text">
                 <br/>
                 <br/>
-                <label for="roleAdd"> Role(ADMIN, HR, RECRUITER, EXAMINEE): </label>
-                <input id="roleAdd" type="text">
+                <label for="roleAdd"> Role: </label>
+                <select id="roleAdd" type="text">
+                    <option value="examinee">Examinee</option>
+                    <option value="technical_recruiter">Technical Recruiter</option>
+                </select>
                 <button id="submit">Submit</button>
             </fieldset>
         </div>
@@ -125,7 +128,10 @@
                         <br/>
                         <br/>
                         <label for="roleUpdate"> Role: </label>
-                        <input id="roleUpdate" type="text">
+                        <select id="roleUpdate" type="text">
+                            <option value="examinee">Examinee</option>
+                            <option value="technical_recruiter">Technical Recruiter</option>
+                        </select>
                         <button id="submitUpdateUsers"
                                 onclick="updateUserRequest(document.getElementById('aidi').innerHTML);hideUpdateModal();">
                             Update

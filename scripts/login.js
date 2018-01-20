@@ -19,9 +19,13 @@ function authenticate() {
         method: "POST",
         data: {"username": username, "password": password},
         success: function (data) {
+            var role = "HR";
             window.localStorage.setItem("token", data['token']);
+            window.localStorage.setItem("user_role", role);
+            window.localStorage.setItem("user_email", "flo@kuende.com");
+            window.localStorage.setItem("user_id", "1");
             console.log("Login success");
-            go_to_html_main_menu();
+            go_to_html_main_menu(role);
         },
         error: function (data) {
             console.log('Error');
@@ -30,6 +34,11 @@ function authenticate() {
     })
 }
 
-function go_to_html_main_menu() {
-    window.location.href = "index.html";
+function go_to_html_main_menu(role) {
+    if(role === "ADMIN" || role === "HR")
+        window.location.href = "index.html";
+    if(role === "EXAMINEE")
+        window.location.href = "indexExaminee.html";
+    if(role === "TECHNICAL RECRUITER")
+        window.location.href = "indexTechnicalRecruiter.html";
 }

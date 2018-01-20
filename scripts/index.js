@@ -14,6 +14,7 @@ $(document).ready(function () {
 
 function try_authenticate() {
     $.ajax({
+        async: false,
         url: server_url + "/api",
         method: "GET",
         contentType: "application/x-www-form-urlencoded",

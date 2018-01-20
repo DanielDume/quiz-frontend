@@ -123,6 +123,17 @@ function getUser(id){
 }
 
 $(document).ready(function () {
+    if(window.localStorage.getItem("user_role") === "ADMIN"){
+        var select = document.getElementById("roleAdd");
+        var option1 = document.createElement("option");
+        var option2 = document.createElement("option");
+        option1.innerHTML = "HR";
+        option1.value = "hr";
+        option2.innerHTML = "Admin";
+        option2.value = "admin";
+        select.appendChild(option1);
+        select.appendChild(option2);
+    }
     searchUser();
     $('#submit').on('click', function () {
         addUser();
