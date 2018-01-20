@@ -6,7 +6,7 @@ function showUpdateModal(id) {
     getQuestion(id);
     document.getElementById("requirementsUpdate").value = current_question.requirements;
     var counter = 1;
-    for(var i in current_question.rightAnswers){
+    for(i in current_question.rightAnswers){
         document.getElementById("answer" + counter.toString() + "Update").value = current_question.rightAnswers[i];
         document.getElementById("checkbox" + counter.toString() + "Update").checked = true;
         counter++;

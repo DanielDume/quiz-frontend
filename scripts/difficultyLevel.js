@@ -1,11 +1,12 @@
 var server_url = "https://quiz-shm.herokuapp.com";
 var current_difficulty;
+var update_id;
 
 function showUpdateModal(id) {
     getDifficulty(id);
     document.getElementById("nameUpdate").value = current_difficulty.name;
     document.getElementById("myModal").style.visibility = "visible";
-    document.getElementById("aidi").innerHTML = id;
+    update_id = id;
 }
 
 function hideUpdateModal() {

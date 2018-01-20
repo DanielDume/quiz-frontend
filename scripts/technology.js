@@ -13,7 +13,7 @@ function showUpdateModal(id) {
     getTechnology(id);
     document.getElementById("nameUpdate").value = current_technology.name;
     document.getElementById("myModal").style.visibility = "visible";
-    document.getElementById("aidi").innerHTML = id;
+    update_id = id;
 }
 
 function hideUpdateModal(){

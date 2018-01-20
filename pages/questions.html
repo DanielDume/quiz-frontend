@@ -131,8 +131,6 @@
                 <h1>Update a question </h1>
                 <div>
                     <fieldset>
-                        <div style="visibility:hidden" id="aidi"></div>
-
                         <label for="requirementsUpdate"> Requirements: </label>
                         <input id="requirementsUpdate" type="text" name="name">
                         <br/><br/>
@@ -174,7 +172,7 @@
 
 
                         <button id="submitUpdateQuestion"
-                                onclick="updateQuestionRequest(document.getElementById('aidi').innerHTML);hideUpdateModal();">
+                                onclick="updateQuestionRequest(update_id);hideUpdateModal();">
                             Update
                         </button>
                         <button id="cancelUpdateTeh"

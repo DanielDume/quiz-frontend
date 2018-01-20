@@ -89,11 +89,10 @@
                 <h1>Update a technology </h1>
                 <div class="form">
                     <fieldset>
-                        <div style="visibility:hidden" id="aidi"></div>
                         <label for="nameUpdate"> Name: </label>
                         <input id="nameUpdate" type="text" name="name">
                         <button id="submitUpdateTeh"
-                                onclick="updateTechnologyRequest(document.getElementById('aidi').innerHTML);hideUpdateModal();">
+                                onclick="updateTechnologyRequest(update_id);hideUpdateModal();">
                             Update
                         </button>
                         <button id="cancelUpdateTeh"
