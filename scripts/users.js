@@ -101,8 +101,8 @@ function searchUser() {
                     item.username + '</h4>' + '<h4 class="user-role">' + item.role;
                 if ((!(window.localStorage.getItem("user_role") === "HR") || !(item.role === "ADMIN"))
                     && (item.role !== "OWNER")) {
-                    row += "</h4><button id=deleteButton> Delete " +
-                        '</button><button id=updateButton onclick="showUpdateModal(\'' + item._id + '\')"> ' +
+                    row += "</h4><button class='roundEdges' id=deleteButton> Delete " +
+                        '</button><button class="roundEdges" id=updateButton onclick="showUpdateModal(\'' + item._id + '\')"> ' +
                         "Update </button></article >";
                 }
                 $("#list").append(row);

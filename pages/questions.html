@@ -70,45 +70,86 @@
             <fieldset>
                 <legend style="font-weight: bold">Add a new question</legend>
                 <div id="quizInput">
-                    <label for="question">Question:</label>
-                    <input type="text" id="question">
-                    <br/><br/>
-
-                    <label for="answer1">A</label>
-                    <input type="text" id="answer1">
-                    <input type="checkbox" id="checkbox1" value="Correct?" title="checkbox1"><br/>
-                    <br/><br/>
-
-                    <label for="answer2">B</label>
-                    <input type="text" id="answer2">
-                    <input type="checkbox" id="checkbox2" value="Correct?" title="checkbox1"><br/>
-                    <br/><br/>
-
-                    <label for="answer3">C</label>
-                    <input type="text" id="answer3">
-                    <input type="checkbox" id="checkbox3" value="Correct?" title="checkbox1"><br/>
-                    <br/><br/>
-
-                    <label for="answer4">D</label>
-                    <input type="text" id="answer4">
-                    <input type="checkbox" id="checkbox4" value="Correct?" title="checkbox1"><br/>
-                    <br/><br/>
-
-                    <label for="timeToAnswer">Time to answer</label>
-                    <input type="text" id="timeToAnswer">
-                    <br/><br/>
-
-                    <label for="technology">Tech</label>
-                    <select id="technology">
-                    </select>
-                    <br/><br/>
-
-                    <label for="difficulty">Diff</label>
-                    <select id="difficulty">
-                    </select>
-                    <br/><br/>
-
-                    <button id="submit">Submit</button>
+                    <tr>
+                    <table class="quizInput">
+                        <tr>
+                            <td>
+                                <label for="question">Question:</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="afterSpace">
+                                <input type="text" id="question" class="roundEdges">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="addNewQuestion">
+                                    <label for="answer1">A</label>
+                                    <input class="roundEdges" type="text" id="answer1" \>
+                                </div>
+                            </td>
+                            <td>
+                                <input type="checkbox" id="checkbox1" value="Correct?" title="checkbox1" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="addNewQuestion">
+                                    <label for="answer2">B</label>
+                                    <input  class="roundEdges" type="text" id="answer2">
+                                </div>
+                            </td>
+                            <td>
+                                    <input type="checkbox" id="checkbox2" value="Correct?" title="checkbox1" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="white-space:nowrap;"> 
+                                <div class="addNewQuestion">
+                                    <label for="answer3">C</label>
+                                    <input class="roundEdges" type="text" id="answer3">
+                                </div>
+                            </td>
+                            <td>
+                                    <input type="checkbox" id="checkbox3" value="Correct?" title="checkbox1" >
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td class="afterSpace">
+                                <div class="addNewQuestion">
+                                <label for="answer4">D</label>
+                                <input  class="roundEdges"type="text" id="answer4">
+                                </div>
+                            </td>
+                            <td> <input type="checkbox" id="checkbox4" value="Correct?" title="checkbox1" ></td>
+                        </tr>
+                        <tr>
+                            <td> <label for="timeToAnswer">Time to answer</label></td>
+                        </tr>
+                        <tr>
+                            <td class="afterSpace"> <input type="text" id="timeToAnswer" class="roundEdges"></td>
+                        </tr>
+                        <tr>
+                            
+                            <td> 
+                                <label for="technology">Tech</label>
+                                <select id="technology" class="right roundEdges" ></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td class="afterSpace">
+                                <label for="difficulty">Diff</label>
+                                <select id="difficulty" class="right roundEdges"></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> <button id="submit" class="roundEdges">Submit</button></td>
+                        </tr>
+                   
+                </table>
                 </div>
             </fieldset>
         </div>

@@ -190,8 +190,8 @@ function getQuestions() {
                     item.requirements +
                     '</h3><h4 class="question-role">' + "Technology: " +
                     item.technology.name + '</h4>' + '<h4 class="question-role">' + "Difficulty: " +
-                    item.difficultyLevel.name + "</h4><button id=deleteButton> Delete " +
-                    '</button><button id=updateButton onclick="showUpdateModal(\'' + item._id + '\')"> ' +
+                    item.difficultyLevel.name + "</h4><button id=deleteButton class='roundEdges'> Delete " +
+                    '</button><button class="roundEdges" id=updateButton onclick="showUpdateModal(\'' + item._id + '\')"> ' +
                     "Update </button></article >";
                 $("#list").append(row);
             });

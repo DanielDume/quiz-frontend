@@ -157,11 +157,65 @@ button:hover {
 .createQuiz h3{
 	margin-bottom: 0;
 	margin-top: 0;
-	font-style: italic;
+  font-style: italic;
+  
+}
+.quizInputSelect{
+  width: 100%
 }
 
 [type=checkbox], [type=radio] {
     width: 30px;
     height: 16px;
 }
+
+#tableCreateQuiz td{
+  padding-bottom: 20px;
+}
+
+#tableCreateQuiz select{
+
+  border-radius:5px;
+  border:1px solid #AAAAAA;
+}
+
+.form #submit {
+  border-radius:5px;
+  border: 1px solid #aaaaaa;
+}
+
+.h3TitleCreateQuiz{
+  margin: 16px !important;
+  padding: 20px !important;
+
+}
+
+.addNewQuestion  label{
+  width: 1px;
+  white-space: nowrap
+}
+.addNewQuestion input {
+  width: 90% !important;
+  float: right;
+}
+
+.afterSpace {
+  padding-bottom: 22px;
+}
+
+.beforeSpace {
+  padding-top: 22px;
+}
+
+.right{
+  float:right;
+  width: 100px;
+}
+
+.roundEdges {
+  border-radius:5px !important;
+  border:1px solid #AAAAAA;
+}
+
+
 	
